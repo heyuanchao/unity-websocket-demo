@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Logout_Btn : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class Logout_Btn : MonoBehaviour
 
     public void Logout()
     {
+        SceneManager.LoadScene("Login");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         MyWebSocket.instance.Disconnect();
     }
 }

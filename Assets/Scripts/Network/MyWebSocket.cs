@@ -7,7 +7,10 @@ using WebSocketSharp;
 public class MyWebSocket : MonoBehaviour
 {
     public static MyWebSocket instance;
+
     private WebSocket ws;
+    private string servAddr;
+    private bool opened;
 
     void Start()
     {
@@ -19,18 +22,23 @@ public class MyWebSocket : MonoBehaviour
 
     }
 
-    private bool isConnected()
+    private bool IsConnected()
     {
         if (ws != null && ws.IsConnected)
+        {
             return true;
+        }
         return false;
     }
 
     public void Connect(string servAddr)
     {
-        if (isConnected()) return;
-        Debug.Log("aaa");
-        ws = new WebSocket(Config.servAddr);
+        if (ws != null || IsConnected())
+        {
+            return;
+        }
+        this.servAddr = servAddr;
+        ws = new WebSocket(servAddr);
 
         ws.OnOpen += OnWebSocketOpen;
         ws.OnClose += OnWebSocketClose;
@@ -41,22 +49,33 @@ public class MyWebSocket : MonoBehaviour
 
     public void Disconnect()
     {
-        if (isConnected())
+        if (IsConnected())
         {
-            Debug.Log("bbb");
             ws.Close();
         }
+        opened = false;
         ws = null;
     }
 
     private void OnWebSocketOpen(object sender, EventArgs e)
     {
-
+        opened = true;
+        Messenger.Broadcast("OnServerConnect");
     }
 
     private void OnWebSocketClose(object sender, CloseEventArgs e)
     {
-        Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason);
+        Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + " " + opened);
+        ws = null;
+        if (opened)
+        {
+            opened = false;
+            Messenger.Broadcast("OnServerDisonnect");
+        }
+        else
+        {
+            Messenger.Broadcast("OnServerUnreachable");
+        }
     }
 
     private void OnMessageReceived(object sender, MessageEventArgs e)

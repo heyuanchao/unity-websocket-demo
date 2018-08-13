@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u767B\u51FA"
+  m_Text: "\u9000\u51FA"
 --- !u!222 &119722918
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: 1297545570}
   - component: {fileID: 1297545569}
   - component: {fileID: 1297545571}
+  - component: {fileID: 1297545572}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -388,12 +389,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 720, y: 1280}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -406,8 +407,8 @@ Canvas:
   m_GameObject: {fileID: 1297545564}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -483,6 +484,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c32fbf1e8a9b2747bd08ec0ee6593c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1297545572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1297545564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501ddc0b183a6b94eae5fb250506c0d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1514471256
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +508,7 @@ GameObject:
   - component: {fileID: 1514471259}
   - component: {fileID: 1514471258}
   m_Layer: 5
-  m_Name: Logout_Btn
+  m_Name: Quit_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,7 +541,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514471256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a884774f83bda4f409315bac19bd3b38, type: 3}
+  m_Script: {fileID: 11500000, guid: 59ff0bc9f629428419ff3a9c0175e37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1514471259
@@ -572,7 +584,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1514471258}
-        m_MethodName: Logout
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

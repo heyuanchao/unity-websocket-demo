@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Login_Btn : MonoBehaviour
 {
-    public int count = 0;
-
     // Use this for initialization
     void Start()
     {
@@ -20,9 +17,6 @@ public class Login_Btn : MonoBehaviour
 
     public void Login()
     {
-        Debug.Log(count);
-        count++;
-
         MyWebSocket.instance.Connect(Config.servAddr);
     }
 }
