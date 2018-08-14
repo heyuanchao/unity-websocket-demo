@@ -1,4 +1,6 @@
-﻿public class Util
+﻿using UnityEngine;
+
+public class Util
 {
     public static void Quit()
     {
