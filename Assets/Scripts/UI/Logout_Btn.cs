@@ -16,7 +16,7 @@ public class Logout_Btn : MonoBehaviour
 
     }
 
-    public void Logout()
+    public void ClickLogout()
     {
         SceneManager.LoadScene("Login");
         SceneManager.sceneLoaded += OnSceneLoaded;

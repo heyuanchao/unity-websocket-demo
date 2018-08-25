@@ -33,7 +33,7 @@ public class MyWebSocket : MonoBehaviour
 
     public void Connect(string servAddr)
     {
-        if (ws != null || IsConnected())
+        if (IsConnected())
         {
             return;
         }
@@ -44,7 +44,7 @@ public class MyWebSocket : MonoBehaviour
         ws.OnClose += OnWebSocketClose;
         ws.OnMessage += OnMessageReceived;
 
-        ws.Connect();
+        ws.ConnectAsync();
     }
 
     public void Disconnect()
@@ -65,7 +65,7 @@ public class MyWebSocket : MonoBehaviour
 
     private void OnWebSocketClose(object sender, CloseEventArgs e)
     {
-        Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + " " + opened);
+        Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + ", Opened: " + opened);
         ws = null;
         if (opened)
         {
@@ -81,12 +81,18 @@ public class MyWebSocket : MonoBehaviour
     private void OnMessageReceived(object sender, MessageEventArgs e)
     {
         var msg = Encoding.UTF8.GetString(e.RawData);
-        Debug.Log("OnBinaryMessageReceived: " + msg);
-        var jd = JsonMapper.ToObject(msg);
-        foreach (string msgName in jd.Keys)
+        Debug.Log("OnMessageReceived: " + msg);
+        var data = JsonMapper.ToObject(msg);
+        foreach (string msgName in data.Keys)
         {
-            Debug.Log(msgName + ":" + jd[msgName].ToJson());
+            // Debug.Log(msgName + " : " + data[msgName].ToJson());
+            Messenger.Broadcast<JsonData>(msgName, data[msgName]);
         }
     }
 
+    public void SendMsg(JsonData data)
+    {
+        Debug.Log("Send: " + data.ToJson());
+        ws.Send(data.ToJson());
+    }
 }
