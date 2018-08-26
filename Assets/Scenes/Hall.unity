@@ -409,7 +409,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1542931417}
+      - m_Target: {fileID: 1215105003}
         m_MethodName: ClickLogout
         m_Mode: 1
         m_Arguments:

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Hall : MonoBehaviour
 {
-    private bool loadLoginScene;
     // Use this for initialization
     void Start()
     {
@@ -15,10 +14,7 @@ public class Hall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (loadLoginScene)
-        {
-            SceneManager.LoadScene("Login");
-        }
+
     }
 
     void OnEnable()
@@ -39,6 +35,18 @@ public class Hall : MonoBehaviour
         Debug.Log("Hall OnDisable");
     }
 
+    public void ClickLogout()
+    {
+        SceneManager.LoadScene("Login");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        Config.gsws.Disconnect();
+    }
+
     void OnServerConnect()
     {
 
@@ -53,6 +61,9 @@ public class Hall : MonoBehaviour
     {
         // todo 弹出错误提示，点击确定切换到登录界面
         Debug.Log("无法连接服务器，请稍后重试");
-        loadLoginScene = true;
+        MainThread.Run(() =>
+        {
+            SceneManager.LoadScene("Hall");
+        });
     }
 }
