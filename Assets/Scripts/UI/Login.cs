@@ -21,7 +21,7 @@ public class Login : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnEnable()
@@ -42,46 +42,66 @@ public class Login : MonoBehaviour
     {
         Messenger.AddListener("OnServerConnect", passwordLogin);
 
-        Config.gsws.Connect();
+        if (Config.gsws.IsConnected())
+        {
+            passwordLogin();
+        }
+        else
+        {
+            Config.gsws.Connect();
+        }
+
     }
 
     void passwordLogin()
     {
         Messenger.RemoveListener("OnServerConnect", passwordLogin);
 
-        var loginMsg = new C2S_Login("15071334753", "123456");
-        Config.gsws.SendMsg(loginMsg.jsonData);
+        Config.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg("15071334753", "123456"));
     }
 
-    public void ClickSmsLogin()
+    public void ClickSmsCodeLogin()
     {
-        Messenger.AddListener("OnServerConnect", smsLogin);
+        Messenger.AddListener("OnServerConnect", smsCodeLogin);
 
-
-        Config.gsws.Connect();
+        if (Config.gsws.IsConnected())
+        {
+            smsCodeLogin();
+        }
+        else
+        {
+            Config.gsws.Connect();
+        }
     }
 
-    void smsLogin()
+    void smsCodeLogin()
     {
-        Messenger.RemoveListener("OnServerConnect", smsLogin);
+        Messenger.RemoveListener("OnServerConnect", smsCodeLogin);
+
+        Config.gsws.SendMsg(new C2S_Login().CreateSmsCodeLoginMsg("15071334753", "6666"));
     }
 
     public void ClickRegister()
     {
         Messenger.AddListener("OnServerConnect", register);
 
+        if (Config.gsws.IsConnected())
+        {
+            register();
+        }
+        else
+        {
+            Config.gsws.Connect();
+        }
 
-        Config.gsws.Connect();
+
     }
 
     void register()
     {
         Messenger.RemoveListener("OnServerConnect", register);
 
-        Debug.Log("aaa");
-
-        //var loginMsg = new C2S_Login("15071334753", "123456");
-        //MyWebSocket.instance.SendMsg(loginMsg.jsonData);
+        Config.gsws.SendMsg(new C2S_Register().CreateRegisterMsg("15071334753", "123456", "6666", "10001"));
     }
 
     public void ClickQuit()
@@ -110,7 +130,7 @@ public class Login : MonoBehaviour
     void OnLogin(JsonData data)
     {
         Debug.Log("OnLogin: " + data.ToJson());
-  
+
         MainThread.Run(() =>
         {
             SceneManager.LoadScene("Hall");

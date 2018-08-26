@@ -265,7 +265,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1297545572}
-        m_MethodName: ClickSmsLogin
+        m_MethodName: ClickSmsCodeLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

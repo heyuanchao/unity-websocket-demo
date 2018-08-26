@@ -3,19 +3,48 @@
 public class C2S_Login
 {
     public static string msgName = "C2S_Login";
-    public JsonData jsonData = new JsonData();
+    private JsonData jsonData = new JsonData();
 
-    public C2S_Login(string account, string password)
+    public JsonData CreatePasswordLoginMsg(string account, string password)
     {
-        var d = new JsonData();
-        d["Account"] = account;
-        d["Password"] = password;
+        var jd = new JsonData();
+        jd["Account"] = account;
+        jd["Password"] = password;
 
-        this.jsonData[msgName] = d;
+        jsonData[msgName] = jd;
+        return jsonData;
+    }
+
+    public JsonData CreateSmsCodeLoginMsg(string account, string smsCode)
+    {
+        var jd = new JsonData();
+        jd["Account"] = account;
+        jd["SmsCode"] = smsCode;
+
+        jsonData[msgName] = jd;
+        return jsonData;
     }
 }
 
 public class S2C_Login
 {
     public static string msgName = "S2C_Login";
+}
+
+public class C2S_Register
+{
+    public static string msgName = "C2S_Register";
+    private JsonData jsonData = new JsonData();
+
+    public JsonData CreateRegisterMsg(string account, string password, string smsCode, string invitationCode)
+    {
+        var jd = new JsonData();
+        jd["Account"] = account;
+        jd["Password"] = password;
+        jd["SmsCode"] = smsCode;
+        jd["InvitationCode"] = invitationCode;
+
+        jsonData[msgName] = jd;
+        return jsonData;
+    }
 }

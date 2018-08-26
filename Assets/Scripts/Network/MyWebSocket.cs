@@ -15,7 +15,7 @@ public class MyWebSocket
         this.servAddr = servAddr;
     }
 
-    private bool IsConnected()
+    public bool IsConnected()
     {
         if (ws == null)
         {
