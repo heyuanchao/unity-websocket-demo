@@ -46,7 +46,7 @@ public class Hall : MonoBehaviour
 
     void OnServerDisonnect()
     {
-        MyWebSocket.instance.Connect(Config.servAddr);
+        Config.gsws.Connect();
     }
 
     void OnServerUnreachable()

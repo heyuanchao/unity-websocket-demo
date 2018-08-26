@@ -41,9 +41,8 @@ public class Login : MonoBehaviour
     public void ClickPasswordLogin()
     {
         Messenger.AddListener("OnServerConnect", passwordLogin);
-       
 
-        MyWebSocket.instance.Connect(Config.servAddr);
+        Config.gsws.Connect();
     }
 
     void passwordLogin()
@@ -51,7 +50,7 @@ public class Login : MonoBehaviour
         Messenger.RemoveListener("OnServerConnect", passwordLogin);
 
         var loginMsg = new C2S_Login("15071334753", "123456");
-        MyWebSocket.instance.SendMsg(loginMsg.jsonData);
+        Config.gsws.SendMsg(loginMsg.jsonData);
     }
 
     public void ClickSmsLogin()
@@ -59,7 +58,7 @@ public class Login : MonoBehaviour
         Messenger.AddListener("OnServerConnect", smsLogin);
 
 
-        MyWebSocket.instance.Connect(Config.servAddr);
+        Config.gsws.Connect();
     }
 
     void smsLogin()
@@ -72,7 +71,7 @@ public class Login : MonoBehaviour
         Messenger.AddListener("OnServerConnect", register);
 
 
-        MyWebSocket.instance.Connect(Config.servAddr);
+        Config.gsws.Connect();
     }
 
     void register()

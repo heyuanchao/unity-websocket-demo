@@ -6,7 +6,7 @@ public class Util
 {
     public static void Quit()
     {
-        MyWebSocket.instance.Disconnect();
+        Config.gsws.Disconnect();
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

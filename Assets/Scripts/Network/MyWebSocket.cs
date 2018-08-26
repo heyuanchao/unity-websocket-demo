@@ -4,40 +4,32 @@ using System.Text;
 using UnityEngine;
 using WebSocketSharp;
 
-public class MyWebSocket : MonoBehaviour
+public class MyWebSocket
 {
-    public static MyWebSocket instance;
-
     private WebSocket ws;
     private string servAddr;
     private bool opened;
 
-    void Start()
+    public MyWebSocket(string servAddr)
     {
-        instance = this;
-    }
-
-    void Update()
-    {
-
+        this.servAddr = servAddr;
     }
 
     private bool IsConnected()
     {
-        if (ws != null && ws.IsConnected)
+        if (ws == null)
         {
-            return true;
+            return false;
         }
-        return false;
+        return ws.IsConnected;
     }
 
-    public void Connect(string servAddr)
+    public void Connect()
     {
         if (IsConnected())
         {
             return;
         }
-        this.servAddr = servAddr;
         ws = new WebSocket(servAddr);
 
         ws.OnOpen += OnWebSocketOpen;
