@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class Util
 {
@@ -13,4 +15,9 @@ public class Util
 #endif
     }
 
+    public static IEnumerator DelayRun(Action action, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        action.Invoke();
+    }
 }

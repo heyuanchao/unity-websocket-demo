@@ -1,38 +1,27 @@
 ﻿using LitJson;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Login : MonoBehaviour
 {
-    private bool loadHallScene;
-
     private Text TipsTxt;
-
-    private Action<string> action;
 
     private void Awake()
     {
-        UnityThread.initUnityThread();
+        MainThread.Init();
     }
+
     void Start()
     {
-        TipsTxt = GameObject.Find("Canvas/Tips_Txt").GetComponent<Text>();
+        TipsTxt = GameObject.Find("Canvas/Bottom_Group/Tips_Txt").GetComponent<Text>();
         TipsTxt.text = "";
-
-        action = SetText;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (loadHallScene)
-        {
-            SceneManager.LoadScene("Hall");
-        }
+        
     }
 
     void OnEnable()
@@ -40,8 +29,6 @@ public class Login : MonoBehaviour
         Messenger.AddListener("OnServerUnreachable", OnServerUnreachable);
 
         Messenger.AddListener<JsonData>(S2C_Login.msgName, OnLogin);
-
-        Debug.Log("Login OnEnable");
     }
 
     void OnDisable()
@@ -49,21 +36,19 @@ public class Login : MonoBehaviour
         Messenger.RemoveListener("OnServerUnreachable", OnServerUnreachable);
 
         Messenger.RemoveListener<JsonData>(S2C_Login.msgName, OnLogin);
-
-        Debug.Log("Login OnDisable");
     }
 
     public void ClickPasswordLogin()
     {
-        Messenger.AddListener("OnServerConnect", OnClickPasswordLogin);
+        Messenger.AddListener("OnServerConnect", passwordLogin);
        
 
         MyWebSocket.instance.Connect(Config.servAddr);
     }
 
-    void OnClickPasswordLogin()
+    void passwordLogin()
     {
-        Messenger.RemoveListener("OnServerConnect", OnClickPasswordLogin);
+        Messenger.RemoveListener("OnServerConnect", passwordLogin);
 
         var loginMsg = new C2S_Login("15071334753", "123456");
         MyWebSocket.instance.SendMsg(loginMsg.jsonData);
@@ -71,28 +56,28 @@ public class Login : MonoBehaviour
 
     public void ClickSmsLogin()
     {
-        Messenger.AddListener("OnServerConnect", OnClickSmsLogin);
+        Messenger.AddListener("OnServerConnect", smsLogin);
 
 
         MyWebSocket.instance.Connect(Config.servAddr);
     }
 
-    void OnClickSmsLogin()
+    void smsLogin()
     {
-        Messenger.RemoveListener("OnServerConnect", OnClickSmsLogin);
+        Messenger.RemoveListener("OnServerConnect", smsLogin);
     }
 
     public void ClickRegister()
     {
-        Messenger.AddListener("OnServerConnect", OnClickRegister);
+        Messenger.AddListener("OnServerConnect", register);
 
 
         MyWebSocket.instance.Connect(Config.servAddr);
     }
 
-    void OnClickRegister()
+    void register()
     {
-        Messenger.RemoveListener("OnServerConnect", OnClickRegister);
+        Messenger.RemoveListener("OnServerConnect", register);
 
         Debug.Log("aaa");
 
@@ -108,20 +93,14 @@ public class Login : MonoBehaviour
     void OnServerUnreachable()
     {
         Debug.Log("无法连接服务器，请稍后重试");
-        //TipsTxt.text = "无法连接服务器，请稍后重试";
-
-        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        MainThread.Run(() =>
         {
-            Debug.Log("This is executed from the main thread");
             SetText("无法连接服务器，请稍后重试");
-            Invoke("SetText", 3f);
+            StartCoroutine(Util.DelayRun(() =>
+            {
+                SetText("");
+            }, 3f));
         });
-
-        //UnityThread.executeInUpdate(() =>
-        //{
-        //    SetText("无法连接服务器，请稍后重试");
-        //    Invoke("SetText", 3f);
-        //});
     }
 
     void SetText(string text)
@@ -132,7 +111,10 @@ public class Login : MonoBehaviour
     void OnLogin(JsonData data)
     {
         Debug.Log("OnLogin: " + data.ToJson());
-        loadHallScene = true;
-
+  
+        MainThread.Run(() =>
+        {
+            SceneManager.LoadScene("Hall");
+        });
     }
 }
