@@ -84,7 +84,7 @@ public class MyWebSocket
 
     public void SendMsg(JsonData data)
     {
-        Debug.Log("Send: " + data.ToJson());
+        Util.Log("Send: " + data.ToJson());
         ws.Send(data.ToJson());
     }
 }
