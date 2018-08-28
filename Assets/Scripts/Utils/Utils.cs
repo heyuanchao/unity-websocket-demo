@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public delegate void HttpCallback(JsonData jd);
 
-public class Util
+public class Utils
 {
     public static void Log(object msg)
     {

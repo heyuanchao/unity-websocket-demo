@@ -7,21 +7,43 @@ using UnityEngine.UI;
 
 public class LoginHelper
 {
+    private Text tips;
+    public InputField account;
+    public Text mobileCode;
+    public Dropdown country;
 
-    private Text TipsTxt;
-    public InputField AccountInput;
-
-    public void InitUI()
+    public void Init()
     {
-        TipsTxt = GameObject.Find("Canvas/Bottom_Group/Tips_Txt").GetComponent<Text>();
-        TipsTxt.text = "";
+        tips = GameObject.Find("Canvas/Bottom_Group/Tips").GetComponent<Text>();
+        account = GameObject.Find("Canvas/Center_Group/Account_Group/Account").GetComponent<InputField>();
+        mobileCode = GameObject.Find("Canvas/Center_Group/Account_Group/Account/MobileCode").GetComponent<Text>();
+        country = GameObject.Find("Canvas/Center_Group/Account_Group/Country").GetComponent<Dropdown>();
 
-        AccountInput = GameObject.Find("Canvas/Account_Group/Account_Input").GetComponent<InputField>();
+        initCountry();
     }
 
-    public void SetText(string text)
+    private void initCountry()
     {
-        TipsTxt.text = text;
+        var options = new List<Dropdown.OptionData>();
+        var codes = MobileCode.GetCodes();
+        foreach (string key in codes.Keys)
+        {
+            options.Add(new Dropdown.OptionData(key));
+        }
+
+        country.AddOptions(options);
+    }
+
+    public void SetTips(string text)
+    {
+        tips.text = text;
+    }
+
+    public void SetMobileCode()
+    {
+        var codes = MobileCode.GetCodes();
+        var key = country.options[country.value].text;
+        mobileCode.text = codes[key];
     }
 
     public void CheckAccountCallback(JsonData jd)
@@ -31,10 +53,10 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errCode > 0)
         {
-            SetText(errMsg);
-            Util.DelayRun2(3f, () =>
+            SetTips(errMsg);
+            Utils.DelayRun2(3f, () =>
             {
-                SetText("");
+                SetTips("");
             });
         }
     }
@@ -75,10 +97,10 @@ public class LoginHelper
         Debug.Log("无法连接服务器，请稍后重试");
         MainThread.Run(() =>
         {
-            SetText("无法连接服务器，请稍后重试");
-            Util.DelayRun2(3f, () =>
+            SetTips("无法连接服务器，请稍后重试");
+            Utils.DelayRun2(3f, () =>
             {
-                SetText("");
+                SetTips("");
             });
         });
     }

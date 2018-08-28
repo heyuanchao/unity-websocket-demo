@@ -23,7 +23,7 @@ internal static class MainThread
 
 public sealed class MainThreadHelper : MonoBehaviour
 {
-    public Queue<Action> queue = new Queue<Action>();
+    private Queue<Action> queue = new Queue<Action>();
 
     void Awake()
     {

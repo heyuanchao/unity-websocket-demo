@@ -8,20 +8,16 @@ public class Login : MonoBehaviour
 {
     private LoginHelper helper = new LoginHelper();
 
-    private void Awake()
-    {
-        MainThread.Init();
-    }
-
     void Start()
     {
-        helper.InitUI();
+        MainThread.Init();
+        helper.Init();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void OnEnable()
@@ -36,6 +32,20 @@ public class Login : MonoBehaviour
         Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+    }
+
+    public void ClickRegister()
+    {
+        Messenger.AddListener("OnServerConnect", helper.Register);
+
+        if (Config.gsws.IsConnected())
+        {
+            helper.Register();
+        }
+        else
+        {
+            Config.gsws.Connect();
+        }
     }
 
     public void ClickPasswordLogin()
@@ -66,30 +76,26 @@ public class Login : MonoBehaviour
         }
     }
 
-    public void ClickRegister()
+    public void ClickResetPassword()
     {
-        Messenger.AddListener("OnServerConnect", helper.Register);
-    
-        if (Config.gsws.IsConnected())
-        {
-            helper.Register();
-        }
-        else
-        {
-            Config.gsws.Connect();
-        }
+
     }
 
     public void ClickQuit()
     {
-        Util.Quit();
+        Utils.Quit();
     }
 
     public void OnAccountEndEdit()
     {
-        if (helper.AccountInput.text.Length > 0)
+        if (helper.account.text.Length > 5)
         {
-            StartCoroutine(Util.HttpGet(Util.GetCheckAccountUrl(helper.AccountInput.text, "zh"), helper.CheckAccountCallback));
+            StartCoroutine(Utils.HttpGet(Utils.GetCheckAccountUrl(helper.account.text, "zh"), helper.CheckAccountCallback));
         }
+    }
+
+    public void OnCountryChanged()
+    {
+        helper.SetMobileCode();
     }
 }
