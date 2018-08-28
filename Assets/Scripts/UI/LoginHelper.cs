@@ -9,6 +9,8 @@ public class LoginHelper
 {
     private Text tips;
     public InputField account;
+    public InputField password;
+    public InputField smsCode;
     public Text mobileCode;
     public Dropdown country;
 
@@ -16,6 +18,8 @@ public class LoginHelper
     {
         tips = GameObject.Find("Canvas/Bottom_Group/Tips").GetComponent<Text>();
         account = GameObject.Find("Canvas/Center_Group/Account_Group/Account").GetComponent<InputField>();
+        password = GameObject.Find("Canvas/Center_Group/Password").GetComponent<InputField>();
+        smsCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
         mobileCode = GameObject.Find("Canvas/Center_Group/Account_Group/Account/MobileCode").GetComponent<Text>();
         country = GameObject.Find("Canvas/Center_Group/Account_Group/Country").GetComponent<Dropdown>();
 
@@ -51,7 +55,7 @@ public class LoginHelper
         Debug.Log(jd.ToJson());
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
-        if (errCode > 0)
+        if (errMsg.Length > 0)
         {
             SetTips(errMsg);
             Utils.DelayRun2(3f, () =>
@@ -65,21 +69,21 @@ public class LoginHelper
     {
         Messenger.RemoveListener("OnServerConnect", PasswordLogin);
 
-        Config.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg("15071334753", "123456"));
+        Config.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(account.text, password.text));
     }
 
     public void SmsCodeLogin()
     {
         Messenger.RemoveListener("OnServerConnect", SmsCodeLogin);
 
-        Config.gsws.SendMsg(new C2S_Login().CreateSmsCodeLoginMsg("15071334753", "6666"));
+        Config.gsws.SendMsg(new C2S_Login().CreateSmsCodeLoginMsg(account.text, smsCode.text));
     }
 
     public void Register()
     {
         Messenger.RemoveListener("OnServerConnect", Register);
 
-        Config.gsws.SendMsg(new C2S_Register().CreateRegisterMsg("15071334753", "123456", "6666", "10001"));
+        Config.gsws.SendMsg(new C2S_Register().CreateRegisterMsg(account.text, password.text, smsCode.text, "10001"));
     }
 
     public void OnLogin(JsonData data)
