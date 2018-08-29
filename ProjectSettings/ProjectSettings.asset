@@ -630,7 +630,18 @@ PlayerSettings:
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: TextMeshPro
+    4: TextMeshPro
+    7: TextMeshPro
+    13: TextMeshPro
+    18: TextMeshPro
+    19: TextMeshPro
+    21: TextMeshPro
+    23: TextMeshPro
+    25: TextMeshPro
+    26: TextMeshPro
+    27: TextMeshPro
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}

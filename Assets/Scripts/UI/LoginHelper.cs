@@ -45,9 +45,16 @@ public class LoginHelper
         country.AddOptions(options);
     }
 
-    public void SetTips(string text)
+    public void ShowTips(string text)
     {
-        tips.text = text;
+        MainThread.Run(() =>
+        {
+            tips.text = text;
+            Utils.DelayRun2(3f, () =>
+            {
+                tips.text = "";
+            });
+        });
     }
 
     public void SetMobileCode()
@@ -85,38 +92,33 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            MainThread.Run(() =>
-            {
-                SetTips(errMsg);
-                Utils.DelayRun2(3f, () =>
-                {
-                    SetTips("");
-                });
-            });
+            ShowTips(errMsg);
         }
     }
 
     public void OnLogin(JsonData jd)
     {
         Debug.Log("OnLogin: " + jd.ToJson());
-
-        MainThread.Run(() =>
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
         {
-            SceneManager.LoadScene("Hall");
-        });
+            ShowTips(errMsg);
+            return;
+        }
+        if (errCode == 0)
+        {
+            MainThread.Run(() =>
+            {
+                SceneManager.LoadScene("Hall");
+            });
+        }
     }
 
     public void OnServerUnreachable()
     {
         Debug.Log("无法连接服务器，请稍后重试");
-        MainThread.Run(() =>
-        {
-            SetTips("无法连接服务器，请稍后重试");
-            Utils.DelayRun2(3f, () =>
-            {
-                SetTips("");
-            });
-        });
+        ShowTips("无法连接服务器，请稍后重试");
     }
 
     public void CheckAccountCallback(JsonData jd)
@@ -126,11 +128,7 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            SetTips(errMsg);
-            Utils.DelayRun2(3f, () =>
-            {
-                SetTips("");
-            });
+            ShowTips(errMsg);
         }
     }
 
@@ -140,11 +138,7 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            SetTips(errMsg);
-            Utils.DelayRun2(3f, () =>
-            {
-                SetTips("");
-            });
+            ShowTips(errMsg);
         }
     }
 }
