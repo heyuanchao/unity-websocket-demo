@@ -24,6 +24,7 @@ public class Login : MonoBehaviour
     {
         Messenger.AddListener("OnServerUnreachable", helper.OnServerUnreachable);
 
+        Messenger.AddListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
         Messenger.AddListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
     }
 
@@ -31,6 +32,7 @@ public class Login : MonoBehaviour
     {
         Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
+        Messenger.RemoveListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
         Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
     }
 
@@ -78,7 +80,7 @@ public class Login : MonoBehaviour
 
     public void ClickResetPassword()
     {
-        StartCoroutine(Utils.HttpGet(Utils.GetResetPasswordUrl(helper.account.text, helper.password.text, helper.smsCode.text, "zh"), helper.CheckAccountCallback));
+        StartCoroutine(Utils.HttpGet(Utils.GetResetPasswordUrl(helper.account.text, helper.password.text, helper.smsCode.text, "zh"), helper.ResetPasswordCallback));
     }
 
     public void ClickQuit()

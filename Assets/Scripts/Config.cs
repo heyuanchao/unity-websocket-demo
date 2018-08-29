@@ -1,7 +1,7 @@
 ﻿public class Config
 {
-    private const string localServHost = "192.168.8.103";
-    private const string remoteServHost = "120.77.205.210";
+    private const string localServHost = "192.168.8.109";
+    private const string remoteServHost = "game.hedr.top";
 
     private const string gameServHost = localServHost;
     // public const string gameServHost = remoteServHost;

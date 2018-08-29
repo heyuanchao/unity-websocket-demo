@@ -74,11 +74,11 @@ public class MyWebSocket
     {
         var msg = Encoding.UTF8.GetString(e.RawData);
         Debug.Log("OnMessageReceived: " + msg);
-        var data = JsonMapper.ToObject(msg);
-        foreach (string msgName in data.Keys)
+        var jd = JsonMapper.ToObject(msg);
+        foreach (string msgName in jd.Keys)
         {
             // Debug.Log(msgName + " : " + data[msgName].ToJson());
-            Messenger.Broadcast<JsonData>(msgName, data[msgName]);
+            Messenger.Broadcast<JsonData>(msgName, jd[msgName]);
         }
     }
 
