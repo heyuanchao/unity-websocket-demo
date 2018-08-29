@@ -72,4 +72,13 @@ public class Utils
             }
         }
     }
+
+    public static string GetAccount()
+    {
+        return PlayerPrefs.GetString("Account", "");
+    }
+    public static void SetAccount(string account)
+    {
+        PlayerPrefs.SetString("Account", account);
+    }
 }

@@ -30,7 +30,17 @@ public class LoginHelper
 
         tips = GameObject.Find("Canvas/Bottom_Group/Tips").GetComponent<Text>();
 
+        initAccount();
         initCountry();
+    }
+
+    private void initAccount()
+    {
+        var acc = Utils.GetAccount();
+        if (acc.Length > 0)
+        {
+            account.text = acc;
+        }
     }
 
     private void initCountry()
@@ -110,6 +120,7 @@ public class LoginHelper
         {
             MainThread.Run(() =>
             {
+                Utils.SetAccount(account.text);
                 SceneManager.LoadScene("Hall");
             });
         }
