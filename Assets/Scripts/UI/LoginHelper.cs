@@ -15,7 +15,8 @@ public class LoginHelper
     public InputField smsCode;
     public InputField invitationCode;
 
-    private Text tips;
+    private GameObject tips;
+    private Text tipsText;
 
 
     public void Init()
@@ -28,7 +29,9 @@ public class LoginHelper
         smsCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
         invitationCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
 
-        tips = GameObject.Find("Canvas/Bottom_Group/Tips").GetComponent<Text>();
+        tips = GameObject.Find("Canvas/Tips");
+        tipsText = GameObject.Find("Canvas/Tips/Text").GetComponent<Text>();
+        tips.SetActive(false);
 
         initAccount();
         initCountry();
@@ -59,10 +62,11 @@ public class LoginHelper
     {
         MainThread.Run(() =>
         {
-            tips.text = text;
+            tips.SetActive(true);
+            tipsText.text = text;
             Utils.DelayRun2(3f, () =>
             {
-                tips.text = "";
+                tips.SetActive(false);
             });
         });
     }
