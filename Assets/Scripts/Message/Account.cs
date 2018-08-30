@@ -21,6 +21,7 @@ public class C2S_Login
         var jd = new JsonData();
         jd["Account"] = account;
         jd["SmsCode"] = smsCode;
+        jd["LoginType"] = 1;
         jd["Lang"] = lang;
 
         jsonData[msgName] = jd;
