@@ -11,6 +11,4 @@
 
     public const string checkAccountAddr = gameServHTTPAddr + "/check";
     public const string resetPasswordAddr = gameServHTTPAddr + "/reset";
-
-    public static MyWebSocket gsws = new MyWebSocket(gameServWSAddr); // 游戏服 WebSocket
 }

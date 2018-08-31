@@ -37,6 +37,8 @@ public class Hall : MonoBehaviour
 
     public void ClickLogout()
     {
+        Utils.SetToken("");
+
         SceneManager.LoadScene("Login");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -44,7 +46,7 @@ public class Hall : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        Config.gsws.Disconnect();
+        Global.gsws.Disconnect();
     }
 
     void OnServerConnect()
@@ -54,7 +56,7 @@ public class Hall : MonoBehaviour
 
     void OnServerDisonnect()
     {
-        Config.gsws.Connect();
+        Global.gsws.Connect();
     }
 
     void OnServerUnreachable()

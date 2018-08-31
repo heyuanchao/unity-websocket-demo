@@ -12,6 +12,8 @@ public class Login : MonoBehaviour
     {
         MainThread.Init();
         helper.Init();
+
+        ClickTokenLogin();
     }
 
     // Update is called once per frame
@@ -40,13 +42,13 @@ public class Login : MonoBehaviour
     {
         Messenger.AddListener("OnServerConnect", helper.Register);
 
-        if (Config.gsws.IsConnected())
+        if (Global.gsws.IsConnected())
         {
             helper.Register();
         }
         else
         {
-            Config.gsws.Connect();
+            Global.gsws.Connect();
         }
     }
 
@@ -54,13 +56,13 @@ public class Login : MonoBehaviour
     {
         Messenger.AddListener("OnServerConnect", helper.PasswordLogin);
 
-        if (Config.gsws.IsConnected())
+        if (Global.gsws.IsConnected())
         {
             helper.PasswordLogin();
         }
         else
         {
-            Config.gsws.Connect();
+            Global.gsws.Connect();
         }
     }
 
@@ -68,13 +70,32 @@ public class Login : MonoBehaviour
     {
         Messenger.AddListener("OnServerConnect", helper.SmsCodeLogin);
 
-        if (Config.gsws.IsConnected())
+        if (Global.gsws.IsConnected())
         {
             helper.SmsCodeLogin();
         }
         else
         {
-            Config.gsws.Connect();
+            Global.gsws.Connect();
+        }
+    }
+
+    public void ClickTokenLogin()
+    {
+        if (Global.account == "" || Global.token == "")
+        {
+            return;
+        }
+
+        Messenger.AddListener("OnServerConnect", helper.TokenLogin);
+
+        if (Global.gsws.IsConnected())
+        {
+            helper.TokenLogin();
+        }
+        else
+        {
+            Global.gsws.Connect();
         }
     }
 

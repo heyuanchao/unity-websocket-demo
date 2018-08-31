@@ -18,7 +18,6 @@ public class LoginHelper
     private GameObject tips;
     private Text tipsText;
 
-
     public void Init()
     {
         country = GameObject.Find("Canvas/Center_Group/Account_Group/Country").GetComponent<Dropdown>();
@@ -29,24 +28,23 @@ public class LoginHelper
         smsCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
         invitationCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
 
-        tips = GameObject.Find("Canvas/Tips");
-        tipsText = GameObject.Find("Canvas/Tips/Text").GetComponent<Text>();
-        tips.SetActive(false);
-
-        initAccount();
-        initCountry();
+        InitAccountAndToken();
+        InitCountry();
+        InitTips();
     }
 
-    private void initAccount()
+    private void InitAccountAndToken()
     {
-        var acc = Utils.GetAccount();
-        if (acc.Length > 0)
+        Global.account = Utils.GetAccount();
+        Global.token = Utils.GetToken();
+
+        if (Global.account.Length > 0)
         {
-            account.text = acc;
+            account.text = Global.account;
         }
     }
 
-    private void initCountry()
+    private void InitCountry()
     {
         var options = new List<Dropdown.OptionData>();
         var codes = MobileCode.GetCodes();
@@ -56,6 +54,17 @@ public class LoginHelper
         }
 
         country.AddOptions(options);
+    }
+
+    private void InitTips()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
+
+        tips = (GameObject)Object.Instantiate(Resources.Load("Prefabs/Tips"));
+        tipsText = tips.transform.Find("Text").GetComponent<Text>();
+        // tips.transform.parent = canvas.transform;
+        tips.transform.SetParent(canvas.transform, false);
+        tips.SetActive(false);
     }
 
     public void ShowTips(string text)
@@ -82,21 +91,32 @@ public class LoginHelper
     {
         Messenger.RemoveListener("OnServerConnect", PasswordLogin);
 
-        Config.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(account.text, password.text, "zh"));
+        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(account.text, password.text, "zh"));
     }
 
     public void SmsCodeLogin()
     {
         Messenger.RemoveListener("OnServerConnect", SmsCodeLogin);
 
-        Config.gsws.SendMsg(new C2S_Login().CreateSmsCodeLoginMsg(account.text, smsCode.text, "zh"));
+        Global.gsws.SendMsg(new C2S_Login().CreateSmsCodeLoginMsg(account.text, smsCode.text, "zh"));
+    }
+
+    public void TokenLogin()
+    {
+        if (Global.account == "" || Global.token == "")
+        {
+            return;
+        }
+        Messenger.RemoveListener("OnServerConnect", TokenLogin);
+
+        Global.gsws.SendMsg(new C2S_Login().CreateTokenLoginMsg(Global.account, Global.token, "zh"));
     }
 
     public void Register()
     {
         Messenger.RemoveListener("OnServerConnect", Register);
 
-        Config.gsws.SendMsg(new C2S_Register().CreateRegisterMsg(account.text, password.text, smsCode.text, invitationCode.text, "zh"));
+        Global.gsws.SendMsg(new C2S_Register().CreateRegisterMsg(account.text, password.text, smsCode.text, invitationCode.text, "zh"));
     }
 
     public void OnRegister(JsonData jd)
@@ -122,11 +142,18 @@ public class LoginHelper
         }
         if (errCode == 0)
         {
+            OnLoginSuccessful(jd);
+            return;
+        }
+        var loginType = int.Parse(jd["LoginType"].ToString());
+        if (loginType == 2) // Token 登录
+        {
+            Utils.Log("Token登录失败");
             MainThread.Run(() =>
             {
-                Utils.SetAccount(account.text);
-                SceneManager.LoadScene("Hall");
+                Utils.SetToken("");
             });
+            return;
         }
     }
 
@@ -155,5 +182,16 @@ public class LoginHelper
         {
             ShowTips(errMsg);
         }
+    }
+
+    private void OnLoginSuccessful(JsonData jd)
+    {
+        MainThread.Run(() =>
+        {
+            Utils.SetAccount(account.text);
+            Utils.SetToken(jd["Token"].ToString());
+
+            SceneManager.LoadScene("Hall");
+        });
     }
 }

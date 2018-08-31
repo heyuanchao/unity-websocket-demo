@@ -16,7 +16,7 @@ public class Utils
 
     public static void Quit()
     {
-        Config.gsws.Disconnect();
+        Global.gsws.Disconnect();
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -77,8 +77,20 @@ public class Utils
     {
         return PlayerPrefs.GetString("Account", "");
     }
-    public static void SetAccount(string account)
+    public static void SetAccount(string value)
     {
-        PlayerPrefs.SetString("Account", account);
+        Global.account = value;
+        PlayerPrefs.SetString("Account", value);
+    }
+
+    public static string GetToken()
+    {
+        return PlayerPrefs.GetString("Token", "");
+    }
+
+    public static void SetToken(string value)
+    {
+        Global.token = value;
+        PlayerPrefs.SetString("Token", value);
     }
 }

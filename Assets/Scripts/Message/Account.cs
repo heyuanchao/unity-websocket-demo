@@ -1,5 +1,8 @@
 ﻿using LitJson;
 
+/*
+ * 服务器定义 http://git.hedr.top:3000/heyuanchao/FeedPetServer/src/master/msg/account.go
+ */
 public class C2S_Login
 {
     public static readonly string msgName = "C2S_Login";
@@ -22,6 +25,18 @@ public class C2S_Login
         jd["Account"] = account;
         jd["SmsCode"] = smsCode;
         jd["LoginType"] = 1;
+        jd["Lang"] = lang;
+
+        jsonData[msgName] = jd;
+        return jsonData;
+    }
+
+    public JsonData CreateTokenLoginMsg(string account, string token, string lang)
+    {
+        var jd = new JsonData();
+        jd["Account"] = account;
+        jd["Token"] = token;
+        jd["LoginType"] = 2;
         jd["Lang"] = lang;
 
         jsonData[msgName] = jd;
