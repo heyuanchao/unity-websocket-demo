@@ -103,13 +103,12 @@ public class LoginHelper
 
     public void TokenLogin()
     {
-        if (Global.account == "" || Global.token == "")
-        {
-            return;
-        }
         Messenger.RemoveListener("OnServerConnect", TokenLogin);
 
-        Global.gsws.SendMsg(new C2S_Login().CreateTokenLoginMsg(Global.account, Global.token, "zh"));
+        if (Global.account != "" && Global.token != "")
+        {
+            Global.gsws.SendMsg(new C2S_Login().CreateTokenLoginMsg(Global.account, Global.token, "zh"));
+        }
     }
 
     public void Register()
@@ -157,6 +156,17 @@ public class LoginHelper
         }
     }
 
+    private void OnLoginSuccessful(JsonData jd)
+    {
+        MainThread.Run(() =>
+        {
+            Utils.SetAccount(jd["Account"].ToString());
+            Utils.SetToken(jd["Token"].ToString());
+
+            SceneManager.LoadScene("Hall");
+        });
+    }
+
     public void OnServerUnreachable()
     {
         Debug.Log("无法连接服务器，请稍后重试");
@@ -182,16 +192,5 @@ public class LoginHelper
         {
             ShowTips(errMsg);
         }
-    }
-
-    private void OnLoginSuccessful(JsonData jd)
-    {
-        MainThread.Run(() =>
-        {
-            Utils.SetAccount(account.text);
-            Utils.SetToken(jd["Token"].ToString());
-
-            SceneManager.LoadScene("Hall");
-        });
     }
 }

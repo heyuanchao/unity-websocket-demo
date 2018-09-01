@@ -9,6 +9,7 @@ public class MyWebSocket
     private WebSocket ws;
     private string servAddr;
     private bool opened;
+    public bool closed;
 
     public MyWebSocket(string servAddr)
     {
@@ -41,11 +42,13 @@ public class MyWebSocket
 
     public void Disconnect()
     {
+        opened = false;
+        closed = true;
+
         if (IsConnected())
         {
             ws.Close();
         }
-        opened = false;
         ws = null;
     }
 
@@ -59,6 +62,12 @@ public class MyWebSocket
     {
         Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + ", Opened: " + opened);
         ws = null;
+        if (closed)
+        {
+            closed = false;
+            return;
+        }
+
         if (opened)
         {
             opened = false;

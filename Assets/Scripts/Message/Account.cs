@@ -72,3 +72,8 @@ public class S2C_Register
 {
     public static readonly string msgName = "S2C_Register";
 }
+
+public class S2C_Close
+{
+    public static readonly string msgName = "S2C_Close";
+}

@@ -101,7 +101,7 @@ public class Login : MonoBehaviour
 
     public void ClickResetPassword()
     {
-        StartCoroutine(Utils.HttpGet(Utils.GetResetPasswordUrl(helper.account.text, helper.password.text, helper.smsCode.text, "zh"), helper.ResetPasswordCallback));
+        StartCoroutine(Utils.HttpGet(Config.GetResetPasswordUrl(helper.account.text, helper.password.text, helper.smsCode.text, "zh"), helper.ResetPasswordCallback));
     }
 
     public void ClickQuit()
@@ -113,7 +113,7 @@ public class Login : MonoBehaviour
     {
         if (helper.mobileCode.text == "0086" && helper.account.text.Length == 11 || helper.account.text.Length > 6)
         {
-            StartCoroutine(Utils.HttpGet(Utils.GetCheckAccountUrl(helper.account.text, "zh"), helper.CheckAccountCallback));
+            StartCoroutine(Utils.HttpGet(Config.GetCheckAccountUrl(helper.account.text, "zh"), helper.CheckAccountCallback));
         }
     }
 
