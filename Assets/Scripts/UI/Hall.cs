@@ -40,6 +40,7 @@ public class Hall : MonoBehaviour
         Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+        Messenger.RemoveListener<JsonData>(S2C_Close.msgName, helper.OnClose);
     }
 
     public void ClickLogout()

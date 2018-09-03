@@ -60,17 +60,14 @@ public class MyWebSocket
 
     private void OnWebSocketClose(object sender, CloseEventArgs e)
     {
-        Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + ", Opened: " + opened);
+        Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + " opened: " + opened + ", closed: " + closed);
         ws = null;
         if (closed)
         {
-            closed = false;
             return;
         }
-
         if (opened)
         {
-            opened = false;
             Messenger.Broadcast("OnServerDisonnect");
         }
         else

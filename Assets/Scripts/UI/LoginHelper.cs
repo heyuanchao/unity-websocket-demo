@@ -15,7 +15,7 @@ public class LoginHelper
     public InputField smsCode;
     public InputField invitationCode;
 
-    private Tips tips = new Tips();
+    private Tips tips;
 
     public void Init()
     {
@@ -29,6 +29,8 @@ public class LoginHelper
 
         InitAccountAndToken();
         InitCountry();
+
+        tips = new Tips();
     }
 
     private void InitAccountAndToken()

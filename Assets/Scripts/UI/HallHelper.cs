@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 public class HallHelper
 {
-    private Tips tips = new Tips();
+    private Tips tips;
 
     public void Init()
     {
-
+        tips = new Tips();
     }
 
     public void TokenLogin()

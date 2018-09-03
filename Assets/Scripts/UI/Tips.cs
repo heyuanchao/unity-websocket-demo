@@ -6,16 +6,17 @@ using UnityEngine.UI;
 
 public class Tips
 {
-    private GameObject tips;
+    private GameObject prefab;
     private Text tipsText;
 
     // Use this for initialization
-    void Init()
+    public Tips()
     {
-        tips = (GameObject)UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Tips"));
-        tipsText = tips.transform.Find("bg/Text").GetComponent<Text>();
+        prefab = (GameObject)UnityEngine.Object.Instantiate(Resources.Load("Prefabs/Tips"));
+        tipsText = prefab.transform.Find("bg/Text").GetComponent<Text>();
         // tips.transform.parent = canvas.transform;
-        tips.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        prefab.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        prefab.SetActive(false);
     }
 
     public void Show(string text)
@@ -27,19 +28,12 @@ public class Tips
     {
         MainThread.Run(() =>
         {
-            if (tips == null)
-            {
-                Init();
-            }
-            else
-            {
-                tips.SetActive(true);
-            }
+            prefab.SetActive(true);
             tipsText.text = text;
 
             Utils.DelayRun2(3f, () =>
             {
-                tips.SetActive(false);
+                prefab.SetActive(false);
                 action.Invoke();
             });
         });
