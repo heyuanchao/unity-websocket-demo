@@ -29,8 +29,6 @@ public class LoginHelper
 
         InitAccountAndToken();
         InitCountry();
-
-        tips.Init();
     }
 
     private void InitAccountAndToken()

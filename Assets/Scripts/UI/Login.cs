@@ -8,11 +8,6 @@ public class Login : MonoBehaviour
 {
     private LoginHelper helper = new LoginHelper();
 
-    void Awake()
-    {
-        Utils.Log("Login Awake");
-    }
-
     void Start()
     {
         Utils.Log("Login Start");

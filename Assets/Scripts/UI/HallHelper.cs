@@ -11,7 +11,7 @@ public class HallHelper
 
     public void Init()
     {
-        tips.Init();
+
     }
 
     public void TokenLogin()
