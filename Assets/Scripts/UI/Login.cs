@@ -8,8 +8,14 @@ public class Login : MonoBehaviour
 {
     private LoginHelper helper = new LoginHelper();
 
+    void Awake()
+    {
+        Utils.Log("Login Awake");
+    }
+
     void Start()
     {
+        Utils.Log("Login Start");
         MainThread.Init();
         helper.Init();
 
@@ -24,6 +30,7 @@ public class Login : MonoBehaviour
 
     void OnEnable()
     {
+        Utils.Log("Login OnEnable");
         Messenger.AddListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.AddListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
@@ -32,6 +39,7 @@ public class Login : MonoBehaviour
 
     void OnDisable()
     {
+        Utils.Log("Login OnDisable");
         Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.RemoveListener<JsonData>(S2C_Register.msgName, helper.OnRegister);

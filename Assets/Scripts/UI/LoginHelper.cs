@@ -15,8 +15,7 @@ public class LoginHelper
     public InputField smsCode;
     public InputField invitationCode;
 
-    private GameObject tips;
-    private Text tipsText;
+    private Tips tips = new Tips();
 
     public void Init()
     {
@@ -30,7 +29,8 @@ public class LoginHelper
 
         InitAccountAndToken();
         InitCountry();
-        InitTips();
+
+        tips.Init();
     }
 
     private void InitAccountAndToken()
@@ -54,30 +54,6 @@ public class LoginHelper
         }
 
         country.AddOptions(options);
-    }
-
-    private void InitTips()
-    {
-        GameObject canvas = GameObject.Find("Canvas");
-
-        tips = (GameObject)Object.Instantiate(Resources.Load("Prefabs/Tips"));
-        tipsText = tips.transform.Find("Text").GetComponent<Text>();
-        // tips.transform.parent = canvas.transform;
-        tips.transform.SetParent(canvas.transform, false);
-        tips.SetActive(false);
-    }
-
-    public void ShowTips(string text)
-    {
-        MainThread.Run(() =>
-        {
-            tips.SetActive(true);
-            tipsText.text = text;
-            Utils.DelayRun2(3f, () =>
-            {
-                tips.SetActive(false);
-            });
-        });
     }
 
     public void SetMobileCode()
@@ -125,7 +101,7 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            ShowTips(errMsg);
+            tips.Show(errMsg);
         }
     }
 
@@ -136,7 +112,7 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            ShowTips(errMsg);
+            tips.Show(errMsg);
             return;
         }
         if (errCode == 0)
@@ -170,7 +146,7 @@ public class LoginHelper
     public void OnServerUnreachable()
     {
         Debug.Log("无法连接服务器，请稍后重试");
-        ShowTips("无法连接服务器，请稍后重试");
+        tips.Show("无法连接服务器，请稍后重试");
     }
 
     public void CheckAccountCallback(JsonData jd)
@@ -180,7 +156,7 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            ShowTips(errMsg);
+            tips.Show(errMsg);
         }
     }
 
@@ -190,7 +166,7 @@ public class LoginHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            ShowTips(errMsg);
+            tips.Show(errMsg);
         }
     }
 }

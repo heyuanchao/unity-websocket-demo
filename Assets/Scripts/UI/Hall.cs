@@ -11,6 +11,7 @@ public class Hall : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Utils.Log("Hall Start");
         helper.Init();
     }
 
@@ -22,21 +23,23 @@ public class Hall : MonoBehaviour
 
     void OnEnable()
     {
+        Utils.Log("Hall OnEnable");
+
         Messenger.AddListener("OnServerDisonnect", helper.OnServerDisonnect);
         Messenger.AddListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.AddListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
         Messenger.AddListener<JsonData>(S2C_Close.msgName, helper.OnClose);
-        Debug.Log("Hall OnEnable");
     }
 
     void OnDisable()
     {
+        Utils.Log("Hall OnDisable");
+
         Messenger.RemoveListener("OnServerDisonnect", helper.OnServerDisonnect);
         Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
-        Debug.Log("Hall OnDisable");
     }
 
     public void ClickLogout()
@@ -52,6 +55,4 @@ public class Hall : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Global.gsws.Disconnect();
     }
-
-    
 }

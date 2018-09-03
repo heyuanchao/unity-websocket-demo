@@ -7,37 +7,11 @@ using UnityEngine.UI;
 
 public class HallHelper
 {
-    private GameObject tips;
-    private Text tipsText;
+    private Tips tips = new Tips();
 
     public void Init()
     {
-        InitTips();
-    }
-
-    private void InitTips()
-    {
-        GameObject canvas = GameObject.Find("Canvas");
-
-        tips = (GameObject)Object.Instantiate(Resources.Load("Prefabs/Tips"));
-        tipsText = tips.transform.Find("Text").GetComponent<Text>();
-        // tips.transform.parent = canvas.transform;
-        tips.transform.SetParent(canvas.transform, false);
-        tips.SetActive(false);
-    }
-
-    public void ShowTips(string text, System.Action action)
-    {
-        MainThread.Run(() =>
-        {
-            tips.SetActive(true);
-            tipsText.text = text;
-            Utils.DelayRun2(3f, () =>
-            {
-                tips.SetActive(false);
-                action.Invoke();
-            });
-        });
+        tips.Init();
     }
 
     public void TokenLogin()
@@ -63,7 +37,7 @@ public class HallHelper
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
         {
-            ShowTips(errMsg, null);
+            tips.Show(errMsg);
             return;
         }
         if (errCode == 0)
@@ -124,7 +98,7 @@ public class HallHelper
         Debug.Log("OnClose: " + jd.ToJson());
         var errMsg = jd["ErrMsg"].ToString();
         Global.gsws.closed = true;
-        ShowTips(errMsg, ()=>
+        tips.Show(errMsg, () =>
         {
             SceneManager.LoadScene("Login");
         });
