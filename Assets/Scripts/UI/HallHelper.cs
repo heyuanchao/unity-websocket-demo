@@ -72,7 +72,7 @@ public class HallHelper
     public void OnServerUnreachable()
     {
         Debug.Log("无法连接服务器");
-        MainThread.Run(() =>
+        tips.Show("无法连接服务器", ()=>
         {
             Utils.SetToken("");
             SceneManager.LoadScene("Login");

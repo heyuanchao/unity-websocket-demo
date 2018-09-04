@@ -31,6 +31,9 @@ public class MyWebSocket
         {
             return;
         }
+        opened = false;
+        closed = false;
+
         ws = new WebSocket(servAddr);
 
         ws.OnOpen += OnWebSocketOpen;
@@ -62,6 +65,7 @@ public class MyWebSocket
     {
         Debug.Log("WebSocket Closed: " + e.Code + " " + e.Reason + " opened: " + opened + ", closed: " + closed);
         ws = null;
+
         if (closed)
         {
             return;
@@ -84,7 +88,15 @@ public class MyWebSocket
         foreach (string msgName in jd.Keys)
         {
             // Debug.Log(msgName + " : " + data[msgName].ToJson());
-            Messenger.Broadcast<JsonData>(msgName, jd[msgName]);
+            if (msgName == "Pong")
+            {
+                ws.Send("{\"Ping\":{}}");
+            }
+            else
+            {
+                Messenger.Broadcast<JsonData>(msgName, jd[msgName]);
+            }
+
         }
     }
 
