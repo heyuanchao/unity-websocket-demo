@@ -34,7 +34,10 @@ public class Tips
             Utils.DelayRun2(3f, () =>
             {
                 prefab.SetActive(false);
-                action.Invoke();
+                if (action != null)
+                {
+                    action.Invoke();
+                }
             });
         });
     }

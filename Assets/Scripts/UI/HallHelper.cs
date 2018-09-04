@@ -22,6 +22,7 @@ public class HallHelper
         {
             MainThread.Run(() =>
             {
+                Debug.Log("token 无效");
                 SceneManager.LoadScene("Login");
             });
             return;
@@ -83,6 +84,7 @@ public class HallHelper
     {
         if (Global.account == "" || Global.token == "")
         {
+            Debug.Log("与服务器断开连接");
             MainThread.Run(() =>
             {
                 SceneManager.LoadScene("Login");

@@ -20,7 +20,7 @@ public class Login : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnEnable()
@@ -35,10 +35,11 @@ public class Login : MonoBehaviour
     void OnDisable()
     {
         Utils.Log("Login OnDisable");
-        Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
+        //Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
-        Messenger.RemoveListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
-        Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+        //Messenger.RemoveListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
+        //Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+        Messenger.Cleanup();
     }
 
     public void ClickRegister()

@@ -36,11 +36,13 @@ public class Hall : MonoBehaviour
     {
         Utils.Log("Hall OnDisable");
 
-        Messenger.RemoveListener("OnServerDisonnect", helper.OnServerDisonnect);
-        Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
+        //Messenger.RemoveListener("OnServerDisonnect", helper.OnServerDisonnect);
+        //Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
 
-        Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
-        Messenger.RemoveListener<JsonData>(S2C_Close.msgName, helper.OnClose);
+        //Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+        //Messenger.RemoveListener<JsonData>(S2C_Close.msgName, helper.OnClose);
+
+        Messenger.Cleanup();
     }
 
     public void ClickLogout()
