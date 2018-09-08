@@ -30,13 +30,14 @@ public class Login : MonoBehaviour
 
         Messenger.AddListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
         Messenger.AddListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+        Messenger.AddListener<JsonData>(S2C_Close.msgName, helper.OnClose);
     }
 
     void OnDisable()
     {
         Utils.Log("Login OnDisable");
         //Messenger.RemoveListener("OnServerUnreachable", helper.OnServerUnreachable);
-
+ 
         //Messenger.RemoveListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
         //Messenger.RemoveListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
         Messenger.Cleanup();

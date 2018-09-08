@@ -73,7 +73,7 @@ public class HallHelper
     public void OnServerUnreachable()
     {
         Debug.Log("无法连接服务器");
-        tips.Show("无法连接服务器", ()=>
+        tips.Show("无法连接服务器", () =>
         {
             Utils.SetToken("");
             SceneManager.LoadScene("Login");
@@ -104,5 +104,112 @@ public class HallHelper
         {
             SceneManager.LoadScene("Login");
         });
+    }
+
+    public void OnShow(JsonData jd)
+    {
+        Debug.Log("OnShow: " + jd.ToJson());
+        var errMsg = jd["ErrMsg"].ToString();
+        tips.Show(errMsg);
+    }
+
+    public void GetPets()
+    {
+        Global.gsws.SendMsg(new C2S_GetPets().CreateGetPetsMsg());
+    }
+
+    public void GetEggs()
+    {
+        Global.gsws.SendMsg(new C2S_GetEggs().CreateGetEggsMsg());
+    }
+
+    public void GetGoods()
+    {
+        Global.gsws.SendMsg(new C2S_GetGoods().CreateGetGoodsMsg());
+    }
+
+    public void OnUpdateEggs(JsonData jd)
+    {
+        Global.eggs.Clear();
+
+        foreach (JsonData item in jd["Eggs"])
+        {
+            // Debug.Log(item.ToJson());
+            Egg egg = new Egg
+            {
+                id = item["Id"].ToString(),
+                petType = int.Parse(item["PetType"].ToString()),
+                name = item["Name"].ToString(),
+                icon = item["Icon"].ToString(),
+                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
+                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
+                reward = int.Parse(item["Reward"].ToString()),
+            };
+
+            Global.eggs.Add(egg);
+        }
+
+        foreach (Egg egg in Global.eggs)
+        {
+            Debug.Log(egg.ToString());
+        }
+    }
+
+    public void OnUpdatePets(JsonData jd)
+    {
+        Global.pets.Clear();
+
+        foreach (JsonData item in jd["Pets"])
+        {
+            // Debug.Log(item.ToJson());
+            Pet pet = new Pet
+            {
+                id = item["Id"].ToString(),
+                petType = int.Parse(item["PetType"].ToString()),
+                name = item["Name"].ToString(),
+                icon = item["Icon"].ToString(),
+                sameDayFeedTimes = int.Parse(item["SameDayFeedTimes"].ToString()),
+                feedTimes = int.Parse(item["FeedTimes"].ToString()),
+                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
+                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
+                reward = int.Parse(item["Reward"].ToString()),
+            };
+
+            Global.pets.Add(pet);
+        }
+
+        foreach (Pet pet in Global.pets)
+        {
+            Debug.Log(pet.ToString());
+        }
+    }
+
+    public void OnUpdateGoods(JsonData jd)
+    {
+        Global.goods.Clear();
+
+        foreach (JsonData item in jd["Goods"])
+        {
+            // Debug.Log(item.ToJson());
+            Goods g = new Goods
+            {
+                petType = int.Parse(item["PetType"].ToString()),
+                name = item["Name"].ToString(),
+                icon = item["Icon"].ToString(),
+                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
+                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
+                reward = int.Parse(item["Reward"].ToString()),
+                price = int.Parse(item["Price"].ToString()),
+                amount = int.Parse(item["Amount"].ToString()),
+                hot = bool.Parse(item["Hot"].ToString()),
+            };
+
+            Global.goods.Add(g);
+        }
+
+        foreach (Goods g in Global.goods)
+        {
+            Debug.Log(g.ToString());
+        }
     }
 }

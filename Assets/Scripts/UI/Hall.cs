@@ -29,7 +29,13 @@ public class Hall : MonoBehaviour
         Messenger.AddListener("OnServerUnreachable", helper.OnServerUnreachable);
 
         Messenger.AddListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
+
         Messenger.AddListener<JsonData>(S2C_Close.msgName, helper.OnClose);
+        Messenger.AddListener<JsonData>(S2C_Show.msgName, helper.OnShow);
+
+        Messenger.AddListener<JsonData>(S2C_UpdateEggs.msgName, helper.OnUpdateEggs);
+        Messenger.AddListener<JsonData>(S2C_UpdatePets.msgName, helper.OnUpdatePets);
+        Messenger.AddListener<JsonData>(S2C_UpdateGoods.msgName, helper.OnUpdateGoods);
     }
 
     void OnDisable()
@@ -57,5 +63,20 @@ public class Hall : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         Global.gsws.Disconnect();
+    }
+
+    public void ClickGetPets()
+    {
+        helper.GetPets();
+    }
+
+    public void ClickGetEggs()
+    {
+        helper.GetEggs();
+    }
+
+    public void ClickGetGoods()
+    {
+        helper.GetGoods();
     }
 }
