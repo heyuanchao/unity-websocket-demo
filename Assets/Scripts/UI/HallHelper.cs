@@ -106,9 +106,9 @@ public class HallHelper
         });
     }
 
-    public void OnShow(JsonData jd)
+    public void OnShowTips(JsonData jd)
     {
-        Debug.Log("OnShow: " + jd.ToJson());
+        Debug.Log("OnShowTips: " + jd.ToJson());
         var errMsg = jd["ErrMsg"].ToString();
         tips.Show(errMsg);
     }

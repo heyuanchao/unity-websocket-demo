@@ -31,7 +31,7 @@ public class Hall : MonoBehaviour
         Messenger.AddListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
 
         Messenger.AddListener<JsonData>(S2C_Close.msgName, helper.OnClose);
-        Messenger.AddListener<JsonData>(S2C_Show.msgName, helper.OnShow);
+        Messenger.AddListener<JsonData>(S2C_ShowTips.msgName, helper.OnShowTips);
 
         Messenger.AddListener<JsonData>(S2C_UpdateEggs.msgName, helper.OnUpdateEggs);
         Messenger.AddListener<JsonData>(S2C_UpdatePets.msgName, helper.OnUpdatePets);
