@@ -88,7 +88,7 @@ public class Hall : MonoBehaviour
         {
             return;
         }
-        Pet pet = (Pet)Global.pets[0];
+        var pet = Global.pets[0];
         helper.Feed(pet.id);
     }
 
@@ -98,7 +98,7 @@ public class Hall : MonoBehaviour
         {
             return;
         }
-        Egg egg = (Egg)Global.eggs[0];
+        var egg = Global.eggs[0];
         helper.Brood(egg.id);
     }
 
@@ -117,7 +117,7 @@ public class Hall : MonoBehaviour
         {
             return;
         }
-        Pet pet = (Pet)Global.pets[0];
+        var pet = Global.pets[0];
         helper.GetFreeFeedTimeLeft(pet.id);
     }
 }

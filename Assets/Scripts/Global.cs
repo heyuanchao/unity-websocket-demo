@@ -10,7 +10,7 @@ public static class Global
 
     public static MyWebSocket gsws = new MyWebSocket(Config.gameServWSAddr); // 游戏服 WebSocket
 
-    public static ArrayList eggs = new ArrayList();
-    public static ArrayList pets = new ArrayList();
-    public static ArrayList goods = new ArrayList();
+    public static List<Egg> eggs = new List<Egg>();
+    public static List<Pet> pets = new List<Pet>();
+    public static List<Goods> goods = new List<Goods>();
 }
