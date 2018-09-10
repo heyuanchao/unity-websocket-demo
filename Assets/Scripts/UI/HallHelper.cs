@@ -212,4 +212,19 @@ public class HallHelper
             Debug.Log(g.ToString());
         }
     }
+
+    public void Feed(string petId)
+    {
+        Global.gsws.SendMsg(new C2S_Feed().CreateFeedMsg(petId));
+    }
+
+    public void Brood(string eggId)
+    {
+        Global.gsws.SendMsg(new C2S_Brood().CreateBroodMsg(eggId));
+    }
+
+    public void Buy(int pos)
+    {
+        Global.gsws.SendMsg(new C2S_Buy().CreateBuyMsg(pos));
+    }
 }

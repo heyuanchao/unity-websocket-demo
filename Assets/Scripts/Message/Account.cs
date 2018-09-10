@@ -6,7 +6,7 @@
 public class C2S_Login
 {
     public static readonly string msgName = "C2S_Login";
-    private JsonData jsonData = new JsonData();
+    private readonly JsonData jsonData = new JsonData();
 
     public JsonData CreatePasswordLoginMsg(string account, string password, string lang)
     {
@@ -52,7 +52,7 @@ public class S2C_Login
 public class C2S_Register
 {
     public static readonly string msgName = "C2S_Register";
-    private JsonData jsonData = new JsonData();
+    private readonly JsonData jsonData = new JsonData();
 
     public JsonData CreateRegisterMsg(string account, string password, string smsCode, string invitationCode, string lang)
     {

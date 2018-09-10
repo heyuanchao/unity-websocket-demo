@@ -79,4 +79,20 @@ public class Hall : MonoBehaviour
     {
         helper.GetGoods();
     }
+
+    public void ClickFeed()
+    {
+        helper.Feed("");
+    }
+
+    public void ClickBrood()
+    {
+        Egg egg = (Egg)Global.eggs[0];
+        helper.Brood(egg.id);
+    }
+
+    public void ClickBuy()
+    {
+        helper.Buy(6);
+    }
 }
