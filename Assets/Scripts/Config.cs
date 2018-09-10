@@ -3,8 +3,8 @@
     private const string localServHost = "192.168.11.24";
     private const string remoteServHost = "game.hedr.top";
 
-    private const string gameServHost = localServHost;
-    // private const string gameServHost = remoteServHost;
+    // private const string gameServHost = localServHost;
+    private const string gameServHost = remoteServHost;
 
     public const string gameServWSAddr = "ws://" + gameServHost + ":8000";
     public const string gameServHTTPAddr = "http://" + gameServHost + ":8001";
