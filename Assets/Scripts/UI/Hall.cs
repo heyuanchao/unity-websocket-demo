@@ -36,6 +36,8 @@ public class Hall : MonoBehaviour
         Messenger.AddListener<JsonData>(S2C_UpdateEggs.msgName, helper.OnUpdateEggs);
         Messenger.AddListener<JsonData>(S2C_UpdatePets.msgName, helper.OnUpdatePets);
         Messenger.AddListener<JsonData>(S2C_UpdateGoods.msgName, helper.OnUpdateGoods);
+
+        Messenger.AddListener<JsonData>(S2C_Buy.msgName, helper.OnBuy);
     }
 
     void OnDisable()
@@ -82,17 +84,40 @@ public class Hall : MonoBehaviour
 
     public void ClickFeed()
     {
-        helper.Feed("");
+        if (Global.pets.Count < 1)
+        {
+            return;
+        }
+        Pet pet = (Pet)Global.pets[0];
+        helper.Feed(pet.id);
     }
 
     public void ClickBrood()
     {
+        if (Global.eggs.Count < 1)
+        {
+            return;
+        }
         Egg egg = (Egg)Global.eggs[0];
         helper.Brood(egg.id);
     }
 
     public void ClickBuy()
     {
-        helper.Buy(6);
+        if (Global.goods.Count < 1)
+        {
+            return;
+        }
+        helper.Buy(Random.Range(0, Global.goods.Count));
+    }
+
+    public void ClickGetFreeFeedTimeLeft()
+    {
+        if (Global.pets.Count < 1)
+        {
+            return;
+        }
+        Pet pet = (Pet)Global.pets[0];
+        helper.GetFreeFeedTimeLeft(pet.id);
     }
 }

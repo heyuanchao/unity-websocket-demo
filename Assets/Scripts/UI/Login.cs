@@ -31,6 +31,8 @@ public class Login : MonoBehaviour
         Messenger.AddListener<JsonData>(S2C_Register.msgName, helper.OnRegister);
         Messenger.AddListener<JsonData>(S2C_Login.msgName, helper.OnLogin);
         Messenger.AddListener<JsonData>(S2C_Close.msgName, helper.OnClose);
+
+        Messenger.AddListener<JsonData>(S2C_UpdatePets.msgName, helper.OnUpdatePets);
     }
 
     void OnDisable()

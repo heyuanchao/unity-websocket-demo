@@ -77,6 +77,32 @@ public class C2S_Feed
     }
 }
 
+public class S2C_UpdateFeedTimes
+{
+    public static readonly string msgName = "S2C_UpdateFeedTimes";
+}
+
+public class C2S_GetFreeFeedTimeLeft
+{
+    public static readonly string msgName = "C2S_GetFreeFeedTimeLeft";
+
+    private readonly JsonData jsonData = new JsonData();
+
+    public JsonData CreateGetFreeFeedTimeLeftMsg(string petId)
+    {
+        var jd = new JsonData();
+        jd["PetId"] = petId;
+
+        jsonData[msgName] = jd;
+        return jsonData;
+    }
+}
+
+public class S2C_UpdateFreeFeedTimeLeft
+{
+    public static readonly string msgName = "S2C_UpdateFreeFeedTimeLeft";
+}
+
 public class C2S_Brood
 {
     public static readonly string msgName = "C2S_Brood";
@@ -92,6 +118,11 @@ public class C2S_Brood
     }
 }
 
+public class S2C_Brood
+{
+    public static readonly string msgName = "S2C_Brood";
+}
+
 public class C2S_Buy
 {
     public static readonly string msgName = "C2S_Buy";
@@ -105,4 +136,14 @@ public class C2S_Buy
         jsonData[msgName] = jd;
         return jsonData;
     }
+}
+
+public class S2C_Buy
+{
+    public static readonly string msgName = "S2C_Buy";
+}
+
+public class S2C_UpdateGoodsAmount
+{
+    public static readonly string msgName = "S2C_UpdateGoodsAmount";
 }

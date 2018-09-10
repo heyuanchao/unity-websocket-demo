@@ -227,4 +227,25 @@ public class HallHelper
     {
         Global.gsws.SendMsg(new C2S_Buy().CreateBuyMsg(pos));
     }
+
+    public void GetFreeFeedTimeLeft(string petId)
+    {
+        Global.gsws.SendMsg(new C2S_GetFreeFeedTimeLeft().CreateGetFreeFeedTimeLeftMsg(petId));
+    }
+
+    public void OnBuy(JsonData jd)
+    {
+        Debug.Log("OnBuy: " + jd.ToJson());
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
+        {
+            tips.Show(errMsg);
+            return;
+        }
+        if (errCode == 2)
+        {
+            // SWC 余额不足，需要弹出购买引导
+        }
+    }
 }
