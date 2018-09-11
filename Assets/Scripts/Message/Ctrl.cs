@@ -10,7 +10,7 @@ public class S2C_ShowTips
     public static readonly string msgName = "S2C_ShowTips";
 }
 
-public class S2C_Close
+public class S2C_Disconnect
 {
-    public static readonly string msgName = "S2C_Close";
+    public static readonly string msgName = "S2C_Disconnect";
 }

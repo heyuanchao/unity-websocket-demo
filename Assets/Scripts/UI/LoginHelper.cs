@@ -149,9 +149,9 @@ public class LoginHelper
         tips.Show("无法连接服务器，请稍后重试");
     }
 
-    public void OnClose(JsonData jd)
+    public void OnDisconnect(JsonData jd)
     {
-        Debug.Log("OnClose: " + jd.ToJson());
+        Debug.Log("OnDisconnect: " + jd.ToJson());
         var errMsg = jd["ErrMsg"].ToString();
         Global.gsws.closed = true;
         tips.Show(errMsg);

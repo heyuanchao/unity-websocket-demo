@@ -95,9 +95,9 @@ public class HallHelper
         Global.gsws.Connect();
     }
 
-    public void OnClose(JsonData jd)
+    public void OnDisconnect(JsonData jd)
     {
-        Debug.Log("OnClose: " + jd.ToJson());
+        Debug.Log("OnDisconnect: " + jd.ToJson());
         var errMsg = jd["ErrMsg"].ToString();
         Global.gsws.closed = true;
         tips.Show(errMsg, () =>
