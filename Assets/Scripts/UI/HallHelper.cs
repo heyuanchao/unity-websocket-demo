@@ -140,7 +140,6 @@ public class HallHelper
                 id = item["Id"].ToString(),
                 petType = int.Parse(item["PetType"].ToString()),
                 name = item["Name"].ToString(),
-                icon = item["Icon"].ToString(),
                 maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
                 feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
                 reward = int.Parse(item["Reward"].ToString()),
@@ -167,7 +166,6 @@ public class HallHelper
                 id = item["Id"].ToString(),
                 petType = int.Parse(item["PetType"].ToString()),
                 name = item["Name"].ToString(),
-                icon = item["Icon"].ToString(),
                 sameDayFeedTimes = int.Parse(item["SameDayFeedTimes"].ToString()),
                 feedTimes = int.Parse(item["FeedTimes"].ToString()),
                 maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
@@ -195,7 +193,6 @@ public class HallHelper
             {
                 petType = int.Parse(item["PetType"].ToString()),
                 name = item["Name"].ToString(),
-                icon = item["Icon"].ToString(),
                 maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
                 feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
                 reward = int.Parse(item["Reward"].ToString()),

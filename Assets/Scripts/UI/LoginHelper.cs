@@ -190,7 +190,6 @@ public class LoginHelper
                 id = item["Id"].ToString(),
                 petType = int.Parse(item["PetType"].ToString()),
                 name = item["Name"].ToString(),
-                icon = item["Icon"].ToString(),
                 sameDayFeedTimes = int.Parse(item["SameDayFeedTimes"].ToString()),
                 feedTimes = int.Parse(item["FeedTimes"].ToString()),
                 maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),

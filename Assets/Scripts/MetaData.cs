@@ -7,7 +7,6 @@ public class Egg
     public string id;
     public int petType;
     public string name;
-    public string icon;
     public int maxFeedTimes; // 最大喂养次数
     public int feedOnceCost; // 单次喂养消耗
     public int reward; // 奖励
@@ -17,7 +16,6 @@ public class Egg
         return "Id: " + id
             + ", PetType: " + petType
             + ", Name: " + name
-            + ", Icon: " + icon
             + ", MaxFeedTimes: " + maxFeedTimes
             + ", FeedOnceCost: " + feedOnceCost
             + ", Reward: " + reward;
@@ -29,7 +27,6 @@ public class Pet
     public string id;
     public int petType;
     public string name;
-    public string icon;
     public int sameDayFeedTimes; // 同一天喂养次数
     public int feedTimes; // 喂养次数
     public int maxFeedTimes; // 最大喂养次数
@@ -41,7 +38,6 @@ public class Pet
         return "Id: " + id
             + ", PetType: " + petType
             + ", Name: " + name
-            + ", Icon: " + icon
             + ", SameDayFeedTimes: " + sameDayFeedTimes
             + ", FeedTimes: " + feedTimes
             + ", MaxFeedTimes: " + maxFeedTimes
@@ -54,7 +50,6 @@ public class Goods
 {
     public int petType;
     public string name;
-    public string icon;
     public int maxFeedTimes; // 最大喂养次数
     public int feedOnceCost; // 单次喂养消耗
     public int reward; // 奖励
@@ -66,7 +61,6 @@ public class Goods
     {
         return "PetType: " + petType
             + ", Name: " + name
-            + ", Icon: " + icon
             + ", MaxFeedTimes: " + maxFeedTimes
             + ", FeedOnceCost: " + feedOnceCost
             + ", Reward: " + reward
