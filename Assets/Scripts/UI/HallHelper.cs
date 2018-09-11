@@ -130,24 +130,7 @@ public class HallHelper
 
     public void OnUpdateEggs(JsonData jd)
     {
-        Global.eggs.Clear();
-
-        foreach (JsonData item in jd["Eggs"])
-        {
-            // Debug.Log(item.ToJson());
-            Egg egg = new Egg
-            {
-                id = item["Id"].ToString(),
-                petType = int.Parse(item["PetType"].ToString()),
-                name = item["Name"].ToString(),
-                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
-                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
-                reward = int.Parse(item["Reward"].ToString()),
-            };
-
-            Global.eggs.Add(egg);
-        }
-
+        Global.eggs = Egg.ParseEggs(jd["Eggs"]);
         foreach (Egg egg in Global.eggs)
         {
             Debug.Log(egg.ToString());
@@ -156,26 +139,7 @@ public class HallHelper
 
     public void OnUpdatePets(JsonData jd)
     {
-        Global.pets.Clear();
-
-        foreach (JsonData item in jd["Pets"])
-        {
-            // Debug.Log(item.ToJson());
-            Pet pet = new Pet
-            {
-                id = item["Id"].ToString(),
-                petType = int.Parse(item["PetType"].ToString()),
-                name = item["Name"].ToString(),
-                sameDayFeedTimes = int.Parse(item["SameDayFeedTimes"].ToString()),
-                feedTimes = int.Parse(item["FeedTimes"].ToString()),
-                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
-                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
-                reward = int.Parse(item["Reward"].ToString()),
-            };
-
-            Global.pets.Add(pet);
-        }
-
+        Global.pets = Pet.ParsePets(jd["Pets"]);
         foreach (Pet pet in Global.pets)
         {
             Debug.Log(pet.ToString());
@@ -184,26 +148,7 @@ public class HallHelper
 
     public void OnUpdateGoods(JsonData jd)
     {
-        Global.goods.Clear();
-
-        foreach (JsonData item in jd["Goods"])
-        {
-            // Debug.Log(item.ToJson());
-            Goods g = new Goods
-            {
-                petType = int.Parse(item["PetType"].ToString()),
-                name = item["Name"].ToString(),
-                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
-                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
-                reward = int.Parse(item["Reward"].ToString()),
-                price = int.Parse(item["Price"].ToString()),
-                amount = int.Parse(item["Amount"].ToString()),
-                hot = bool.Parse(item["Hot"].ToString()),
-            };
-
-            Global.goods.Add(g);
-        }
-
+        Global.goods = Goods.ParseGoods(jd["Goods"]);
         foreach (Goods g in Global.goods)
         {
             Debug.Log(g.ToString());
