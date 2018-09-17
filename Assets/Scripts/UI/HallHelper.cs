@@ -199,5 +199,6 @@ public class HallHelper
         {
             Debug.Log(m);
         }
+        Global.marquees.Clear();
     }
 }

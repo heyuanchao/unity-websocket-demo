@@ -195,5 +195,6 @@ public class LoginHelper
         {
             Debug.Log(m);
         }
+        Global.marquees.Clear();
     }
 }
