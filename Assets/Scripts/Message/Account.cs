@@ -8,11 +8,12 @@ public class C2S_Login
     public static readonly string msgName = "C2S_Login";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreatePasswordLoginMsg(string account, string password, string lang)
+    public JsonData CreatePasswordLoginMsg(string account, string password, string mobileCode, string lang)
     {
         var jd = new JsonData();
         jd["Account"] = account;
         jd["Password"] = password;
+        jd["MobileCode"] = mobileCode;
         jd["Lang"] = lang;
 
         jsonData[msgName] = jd;

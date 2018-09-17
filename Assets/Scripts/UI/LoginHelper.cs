@@ -67,7 +67,7 @@ public class LoginHelper
     {
         Messenger.RemoveListener("OnServerConnect", PasswordLogin);
 
-        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(account.text, password.text, "zh"));
+        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(account.text, password.text, mobileCode.text.Substring(2), "zh"));
     }
 
     public void SmsCodeLogin()
