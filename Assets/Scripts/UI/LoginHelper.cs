@@ -180,29 +180,20 @@ public class LoginHelper
 
     public void OnUpdatePets(JsonData jd)
     {
-        Global.pets.Clear();
-
-        foreach (JsonData item in jd["Pets"])
-        {
-            // Debug.Log(item.ToJson());
-            Pet pet = new Pet
-            {
-                id = item["Id"].ToString(),
-                petType = int.Parse(item["PetType"].ToString()),
-                name = item["Name"].ToString(),
-                sameDayFeedTimes = int.Parse(item["SameDayFeedTimes"].ToString()),
-                feedTimes = int.Parse(item["FeedTimes"].ToString()),
-                maxFeedTimes = int.Parse(item["MaxFeedTimes"].ToString()),
-                feedOnceCost = int.Parse(item["FeedOnceCost"].ToString()),
-                reward = int.Parse(item["Reward"].ToString()),
-            };
-
-            Global.pets.Add(pet);
-        }
-
+        Global.pets = Pet.ParsePets(jd["Pets"]);
         foreach (Pet pet in Global.pets)
         {
             Debug.Log(pet.ToString());
+        }
+    }
+
+    public void OnMarquee(JsonData jd)
+    {
+
+        Global.marquees.Add(jd["Msg"].ToString());
+        foreach (var m in Global.marquees)
+        {
+            Debug.Log(m);
         }
     }
 }

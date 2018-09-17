@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,4 +14,26 @@ public class S2C_ShowTips
 public class S2C_Disconnect
 {
     public static readonly string msgName = "S2C_Disconnect";
+}
+
+public class S2C_Marquee
+{
+    public static readonly string msgName = "S2C_Marquee";
+}
+
+public class Ping
+{
+    public static readonly string msgName = "Ping";
+    private readonly JsonData jsonData = new JsonData();
+
+    public JsonData CreatePingMsg()
+    {
+        jsonData[msgName] = JsonMapper.ToObject("{}");
+        return jsonData;
+    }
+}
+
+public class Pong
+{
+    public static readonly string msgName = "Pong";
 }

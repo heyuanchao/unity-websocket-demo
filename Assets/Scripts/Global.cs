@@ -13,4 +13,6 @@ public static class Global
     public static List<Egg> eggs = new List<Egg>();
     public static List<Pet> pets = new List<Pet>();
     public static List<Goods> goods = new List<Goods>();
+
+    public static List<string> marquees = new List<string>();
 }

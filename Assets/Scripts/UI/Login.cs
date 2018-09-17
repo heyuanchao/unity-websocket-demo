@@ -33,6 +33,7 @@ public class Login : MonoBehaviour
         Messenger.AddListener<JsonData>(S2C_Disconnect.msgName, helper.OnDisconnect);
 
         Messenger.AddListener<JsonData>(S2C_UpdatePets.msgName, helper.OnUpdatePets);
+        Messenger.AddListener<JsonData>(S2C_Marquee.msgName, helper.OnMarquee);
     }
 
     void OnDisable()

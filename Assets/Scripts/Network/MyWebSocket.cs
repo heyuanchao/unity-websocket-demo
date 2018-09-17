@@ -7,7 +7,7 @@ using WebSocketSharp;
 public class MyWebSocket
 {
     private WebSocket ws;
-    private string servAddr;
+    private readonly string servAddr;
     private bool opened;
     public bool closed;
 
@@ -88,15 +88,14 @@ public class MyWebSocket
         foreach (string msgName in jd.Keys)
         {
             // Debug.Log(msgName + " : " + data[msgName].ToJson());
-            if (msgName == "Pong")
+            if (msgName == Pong.msgName)
             {
-                ws.Send("{\"Ping\":{}}");
+                SendMsg(new Ping().CreatePingMsg());
             }
             else
             {
                 Messenger.Broadcast<JsonData>(msgName, jd[msgName]);
             }
-
         }
     }
 

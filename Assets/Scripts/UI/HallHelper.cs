@@ -190,4 +190,14 @@ public class HallHelper
             // SWC 余额不足，需要弹出购买引导
         }
     }
+
+    public void OnMarquee(JsonData jd)
+    {
+
+        Global.marquees.Add(jd["Msg"].ToString());
+        foreach (var m in Global.marquees)
+        {
+            Debug.Log(m);
+        }
+    }
 }
