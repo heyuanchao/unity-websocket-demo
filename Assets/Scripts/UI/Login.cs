@@ -134,7 +134,7 @@ public class Login : MonoBehaviour
     {
         if (helper.mobileCode.text == "0086" && helper.account.text.Length == 11 || helper.account.text.Length > 6)
         {
-            StartCoroutine(Utils.HttpGet(Config.GetRegistrationSmsCodeUrl(helper.account.text, "86"), null));
+            StartCoroutine(Utils.HttpGet(Config.GetRegistrationSmsCodeUrl(helper.account.text, "86"), helper.GetRegistrationSmsCodeCallback));
         }
     }
 }

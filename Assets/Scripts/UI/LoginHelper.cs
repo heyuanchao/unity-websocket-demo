@@ -67,7 +67,7 @@ public class LoginHelper
     {
         Messenger.RemoveListener("OnServerConnect", PasswordLogin);
 
-        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(account.text, password.text, mobileCode.text.Substring(2), "zh"));
+        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(mobileCode.text.Substring(2), account.text, password.text,  "zh"));
     }
 
     public void SmsCodeLogin()
@@ -91,7 +91,7 @@ public class LoginHelper
     {
         Messenger.RemoveListener("OnServerConnect", Register);
 
-        Global.gsws.SendMsg(new C2S_Register().CreateRegisterMsg(account.text, password.text, smsCode.text, invitationCode.text, "zh"));
+        Global.gsws.SendMsg(new C2S_Register().CreateRegisterMsg(mobileCode.text.Substring(2), account.text, password.text, smsCode.text, invitationCode.text, "zh"));
     }
 
     public void OnRegister(JsonData jd)
@@ -152,7 +152,7 @@ public class LoginHelper
     public void OnDisconnect(JsonData jd)
     {
         Debug.Log("OnDisconnect: " + jd.ToJson());
-        var errMsg = jd["ErrMsg"].ToString();
+        var errMsg = jd["Msg"].ToString();
         Global.gsws.closed = true;
         tips.Show(errMsg);
     }
@@ -160,6 +160,16 @@ public class LoginHelper
     public void CheckAccountCallback(JsonData jd)
     {
         // Debug.Log(jd.ToJson());
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
+        {
+            tips.Show(errMsg);
+        }
+    }
+
+    public void GetRegistrationSmsCodeCallback(JsonData jd)
+    {
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)

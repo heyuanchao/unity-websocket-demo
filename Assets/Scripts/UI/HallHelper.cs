@@ -98,7 +98,7 @@ public class HallHelper
     public void OnDisconnect(JsonData jd)
     {
         Debug.Log("OnDisconnect: " + jd.ToJson());
-        var errMsg = jd["ErrMsg"].ToString();
+        var errMsg = jd["Msg"].ToString();
         Global.gsws.closed = true;
         tips.Show(errMsg, () =>
         {
@@ -109,7 +109,7 @@ public class HallHelper
     public void OnShowTips(JsonData jd)
     {
         Debug.Log("OnShowTips: " + jd.ToJson());
-        var errMsg = jd["ErrMsg"].ToString();
+        var errMsg = jd["Msg"].ToString();
         tips.Show(errMsg);
     }
 
@@ -200,5 +200,17 @@ public class HallHelper
             Debug.Log(m);
         }
         Global.marquees.Clear();
+    }
+
+    public void OnBrood(JsonData jd)
+    {
+        Debug.Log("OnBrood: " + jd.ToJson());
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
+        {
+            tips.Show(errMsg);
+            return;
+        }
     }
 }

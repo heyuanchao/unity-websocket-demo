@@ -8,12 +8,12 @@ public class C2S_Login
     public static readonly string msgName = "C2S_Login";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreatePasswordLoginMsg(string account, string password, string mobileCode, string lang)
+    public JsonData CreatePasswordLoginMsg(string mobileCode, string account, string password, string lang)
     {
         var jd = new JsonData();
+        jd["MobileCode"] = mobileCode;
         jd["Account"] = account;
         jd["Password"] = password;
-        jd["MobileCode"] = mobileCode;
         jd["Lang"] = lang;
 
         jsonData[msgName] = jd;
@@ -55,9 +55,10 @@ public class C2S_Register
     public static readonly string msgName = "C2S_Register";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreateRegisterMsg(string account, string password, string smsCode, string invitationCode, string lang)
+    public JsonData CreateRegisterMsg(string mobileCode, string account, string password, string smsCode, string invitationCode, string lang)
     {
         var jd = new JsonData();
+        jd["MobileCode"] = mobileCode;
         jd["Account"] = account;
         jd["Password"] = password;
         jd["SmsCode"] = smsCode;

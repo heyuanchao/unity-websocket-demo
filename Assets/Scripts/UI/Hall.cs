@@ -39,6 +39,8 @@ public class Hall : MonoBehaviour
 
         Messenger.AddListener<JsonData>(S2C_Buy.msgName, helper.OnBuy);
         Messenger.AddListener<JsonData>(S2C_Marquee.msgName, helper.OnMarquee);
+
+        Messenger.AddListener<JsonData>(S2C_Brood.msgName, helper.OnBrood);
     }
 
     void OnDisable()
