@@ -67,14 +67,21 @@ public class C2S_Feed
     public static readonly string msgName = "C2S_Feed";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreateFeedMsg(string petId)
+    public JsonData CreateFeedMsg(string petId, string smsCode, bool noPassword)
     {
         var jd = new JsonData();
         jd["PetId"] = petId;
+        jd["SmsCode"] = smsCode;
+        jd["NoPassword"] = noPassword;
 
         jsonData[msgName] = jd;
         return jsonData;
     }
+}
+
+public class S2C_Feed
+{
+    public static readonly string msgName = "S2C_Feed";
 }
 
 public class S2C_UpdateFeedTimes
@@ -128,10 +135,12 @@ public class C2S_Buy
     public static readonly string msgName = "C2S_Buy";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreateBuyMsg(int pos)
+    public JsonData CreateBuyMsg(int pos, string smsCode, bool noPassword)
     {
         var jd = new JsonData();
         jd["Position"] = pos;
+        jd["SmsCode"] = smsCode;
+        jd["NoPassword"] = noPassword;
 
         jsonData[msgName] = jd;
         return jsonData;

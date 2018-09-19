@@ -7,10 +7,16 @@ using UnityEngine.UI;
 
 public class HallHelper
 {
+    public InputField smsCode;
+    public Toggle noPasswordPay;
+
     private Tips tips;
 
     public void Init()
     {
+        smsCode = GameObject.Find("Canvas/Group3/SmsCode").GetComponent<InputField>();
+        noPasswordPay = GameObject.Find("Canvas/Group3/NoPasswordPay").GetComponent<Toggle>();
+
         tips = new Tips();
     }
 
@@ -157,7 +163,7 @@ public class HallHelper
 
     public void Feed(string petId)
     {
-        Global.gsws.SendMsg(new C2S_Feed().CreateFeedMsg(petId));
+        Global.gsws.SendMsg(new C2S_Feed().CreateFeedMsg(petId, smsCode.text, noPasswordPay.isOn));
     }
 
     public void Brood(string eggId)
@@ -167,7 +173,7 @@ public class HallHelper
 
     public void Buy(int pos)
     {
-        Global.gsws.SendMsg(new C2S_Buy().CreateBuyMsg(pos));
+        Global.gsws.SendMsg(new C2S_Buy().CreateBuyMsg(pos, smsCode.text, noPasswordPay.isOn));
     }
 
     public void GetFreeFeedTimeLeft(string petId)
@@ -187,7 +193,31 @@ public class HallHelper
         }
         if (errCode == 2)
         {
-            // SWC 余额不足，需要弹出购买引导
+            // 需要弹出购买引导界面
+        }
+        else if (errCode == 3)
+        {
+            // 需要弹出获取消费验证码界面
+        }
+    }
+
+    public void OnFeed(JsonData jd)
+    {
+        Debug.Log("OnFeed: " + jd.ToJson());
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
+        {
+            tips.Show(errMsg);
+            return;
+        }
+        if (errCode == 2)
+        {
+            // 需要弹出购买引导界面
+        }
+        else if (errCode == 3)
+        {
+            // 需要弹出获取消费验证码界面
         }
     }
 
@@ -211,6 +241,16 @@ public class HallHelper
         {
             tips.Show(errMsg);
             return;
+        }
+    }
+
+    public void GetConsumptionSmsCodeCallback(JsonData jd)
+    {
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
+        {
+            tips.Show(errMsg);
         }
     }
 }

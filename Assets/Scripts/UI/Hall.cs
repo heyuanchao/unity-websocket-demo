@@ -41,6 +41,7 @@ public class Hall : MonoBehaviour
         Messenger.AddListener<JsonData>(S2C_Marquee.msgName, helper.OnMarquee);
 
         Messenger.AddListener<JsonData>(S2C_Brood.msgName, helper.OnBrood);
+        Messenger.AddListener<JsonData>(S2C_Feed.msgName, helper.OnFeed);
     }
 
     void OnDisable()
@@ -101,7 +102,7 @@ public class Hall : MonoBehaviour
         {
             return;
         }
-        var egg = Global.eggs[0];
+        var egg = Global.eggs[Random.Range(0, Global.eggs.Count)];
         helper.Brood(egg.id);
     }
 
@@ -122,5 +123,10 @@ public class Hall : MonoBehaviour
         }
         var pet = Global.pets[0];
         helper.GetFreeFeedTimeLeft(pet.id);
+    }
+
+    public void ClickGetConsumptionSmsCode()
+    {
+        StartCoroutine(Utils.HttpGet(Config.GetConsumptionSmsCodeUrl(Global.account, "86"), helper.GetConsumptionSmsCodeCallback));
     }
 }

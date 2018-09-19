@@ -25,7 +25,7 @@ public class LoginHelper
         account = GameObject.Find("Canvas/Center_Group/Account_Group/Account").GetComponent<InputField>();
         password = GameObject.Find("Canvas/Center_Group/Password").GetComponent<InputField>();
         smsCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
-        invitationCode = GameObject.Find("Canvas/Center_Group/SmsCode_Group/SmsCode").GetComponent<InputField>();
+        invitationCode = GameObject.Find("Canvas/Center_Group/InvitationCode").GetComponent<InputField>();
 
         InitAccountAndToken();
         InitCountry();
