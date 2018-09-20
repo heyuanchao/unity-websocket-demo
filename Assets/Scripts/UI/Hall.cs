@@ -112,7 +112,8 @@ public class Hall : MonoBehaviour
         {
             return;
         }
-        helper.Buy(Random.Range(0, Global.goods.Count));
+        //helper.Buy(Random.Range(0, Global.goods.Count));
+        helper.Buy(7);
     }
 
     public void ClickGetFreeFeedTimeLeft()

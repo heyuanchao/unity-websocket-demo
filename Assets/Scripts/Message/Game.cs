@@ -135,10 +135,10 @@ public class C2S_Buy
     public static readonly string msgName = "C2S_Buy";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreateBuyMsg(int pos, string smsCode, bool noPassword)
+    public JsonData CreateBuyMsg(int petType, string smsCode, bool noPassword)
     {
         var jd = new JsonData();
-        jd["Position"] = pos;
+        jd["PetType"] = petType;
         jd["SmsCode"] = smsCode;
         jd["NoPassword"] = noPassword;
 

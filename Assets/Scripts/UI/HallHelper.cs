@@ -171,9 +171,9 @@ public class HallHelper
         Global.gsws.SendMsg(new C2S_Brood().CreateBroodMsg(eggId));
     }
 
-    public void Buy(int pos)
+    public void Buy(int petType)
     {
-        Global.gsws.SendMsg(new C2S_Buy().CreateBuyMsg(pos, smsCode.text, noPasswordPay.isOn));
+        Global.gsws.SendMsg(new C2S_Buy().CreateBuyMsg(petType, smsCode.text, noPasswordPay.isOn));
     }
 
     public void GetFreeFeedTimeLeft(string petId)
