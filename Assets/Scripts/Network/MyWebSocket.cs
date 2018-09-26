@@ -72,6 +72,7 @@ public class MyWebSocket
         }
         if (opened)
         {
+            opened = false;
             Messenger.Broadcast("OnServerDisonnect");
         }
         else

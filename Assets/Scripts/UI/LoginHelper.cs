@@ -1,5 +1,4 @@
 ﻿using LitJson;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -206,5 +205,11 @@ public class LoginHelper
             Debug.Log(m);
         }
         Global.marquees.Clear();
+    }
+
+    public void OnUpdateCoins(JsonData jd)
+    {
+        Debug.Log(jd["Coins"].ToString());
+        Debug.Log(float.Parse(jd["Coins"].ToString()));
     }
 }
