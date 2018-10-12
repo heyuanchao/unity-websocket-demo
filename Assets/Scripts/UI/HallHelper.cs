@@ -119,9 +119,9 @@ public class HallHelper
         tips.Show(errMsg);
     }
 
-    public void GetPets()
+    public void GetPets(int state)
     {
-        Global.gsws.SendMsg(new C2S_GetPets().CreateGetPetsMsg());
+        Global.gsws.SendMsg(new C2S_GetPets().CreateGetPetsMsg(state));
     }
 
     public void GetEggs()
@@ -198,6 +198,7 @@ public class HallHelper
         else if (errCode == 3)
         {
             // 需要弹出获取消费验证码界面
+            Debug.Log("请输入消费验证码");
         }
     }
 
@@ -218,6 +219,7 @@ public class HallHelper
         else if (errCode == 3)
         {
             // 需要弹出获取消费验证码界面
+            Debug.Log("请输入消费验证码");
         }
     }
 
@@ -252,5 +254,15 @@ public class HallHelper
         {
             tips.Show(errMsg);
         }
+    }
+
+    public void Store(string petId)
+    {
+        Global.gsws.SendMsg(new C2S_Store().CreateStoreMsg(petId));
+    }
+
+    public void Sell(string petId)
+    {
+        Global.gsws.SendMsg(new C2S_Sell().CreateSellMsg(petId));
     }
 }

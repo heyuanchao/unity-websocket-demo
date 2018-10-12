@@ -71,9 +71,14 @@ public class Hall : MonoBehaviour
         Global.gsws.Disconnect();
     }
 
-    public void ClickGetPets()
+    public void ClickGetFeedingPets()
     {
-        helper.GetPets();
+        helper.GetPets(0);
+    }
+
+    public void ClickGetMaturePets()
+    {
+        helper.GetPets(1);
     }
 
     public void ClickGetEggs()
@@ -112,8 +117,28 @@ public class Hall : MonoBehaviour
         {
             return;
         }
-        //helper.Buy(Random.Range(0, Global.goods.Count));
-        helper.Buy(7);
+        // helper.Buy(Random.Range(0, Global.goods.Count));
+        helper.Buy(3);
+    }
+
+    public void ClickStorePet()
+    {
+        if (Global.pets.Count < 1)
+        {
+            return;
+        }
+        var pet = Global.pets[0];
+        helper.Store(pet.id);
+    }
+
+    public void ClickSell()
+    {
+        if (Global.pets.Count < 1)
+        {
+            return;
+        }
+        var pet = Global.pets[0];
+        helper.Sell(pet.id);
     }
 
     public void ClickGetFreeFeedTimeLeft()

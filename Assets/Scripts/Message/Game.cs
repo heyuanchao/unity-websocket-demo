@@ -16,9 +16,12 @@ public class C2S_GetPets
     public static readonly string msgName = "C2S_GetPets";
     private readonly JsonData jsonData = new JsonData();
 
-    public JsonData CreateGetPetsMsg()
+    public JsonData CreateGetPetsMsg(int state)
     {
-        jsonData[msgName] = JsonMapper.ToObject("{}");
+        var jd = new JsonData();
+        jd["State"] = state;
+
+        jsonData[msgName] = jd;
         return jsonData;
     }
 }
@@ -155,4 +158,44 @@ public class S2C_Buy
 public class S2C_UpdateGoodsAmount
 {
     public static readonly string msgName = "S2C_UpdateGoodsAmount";
+}
+
+public class C2S_Store
+{
+    public static readonly string msgName = "C2S_Store";
+    private readonly JsonData jsonData = new JsonData();
+
+    public JsonData CreateStoreMsg(string petId)
+    {
+        var jd = new JsonData();
+        jd["PetId"] = petId;
+
+        jsonData[msgName] = jd;
+        return jsonData;
+    }
+}
+
+public class S2C_Store
+{
+    public static readonly string msgName = "S2C_Store";
+}
+
+public class C2S_Sell
+{
+    public static readonly string msgName = "C2S_Sell";
+    private readonly JsonData jsonData = new JsonData();
+
+    public JsonData CreateSellMsg(string petId)
+    {
+        var jd = new JsonData();
+        jd["PetId"] = petId;
+
+        jsonData[msgName] = jd;
+        return jsonData;
+    }
+}
+
+public class S2C_Sell
+{
+    public static readonly string msgName = "S2C_Sell";
 }

@@ -50,7 +50,7 @@ public class MyWebSocket
 
         if (IsConnected())
         {
-            ws.Close();
+            ws.CloseAsync();
         }
         ws = null;
     }

@@ -66,7 +66,7 @@ public class LoginHelper
     {
         Messenger.RemoveListener("OnServerConnect", PasswordLogin);
 
-        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(mobileCode.text.Substring(2), account.text, password.text,  "zh"));
+        Global.gsws.SendMsg(new C2S_Login().CreatePasswordLoginMsg(mobileCode.text.Substring(2), account.text, password.text, "zh"));
     }
 
     public void SmsCodeLogin()
@@ -211,5 +211,18 @@ public class LoginHelper
     {
         Debug.Log(jd["Coins"].ToString());
         Debug.Log(float.Parse(jd["Coins"].ToString()));
+    }
+
+    public void GetServerListCallback(JsonData jd)
+    {
+        if (!jd.IsArray)
+        {
+            return;
+        }
+
+        for (int i = 0; i < jd.Count; i++)
+        {
+            Debug.Log(jd[i].ToJson());
+        }
     }
 }

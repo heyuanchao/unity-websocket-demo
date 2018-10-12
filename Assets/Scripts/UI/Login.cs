@@ -139,4 +139,9 @@ public class Login : MonoBehaviour
             StartCoroutine(Utils.HttpGet(Config.GetRegistrationSmsCodeUrl(helper.account.text, "86"), helper.GetRegistrationSmsCodeCallback));
         }
     }
+
+    public void ClickGetServerList()
+    {
+        StartCoroutine(Utils.HttpGet(Config.serverListUrl, helper.GetServerListCallback));
+    }
 }
