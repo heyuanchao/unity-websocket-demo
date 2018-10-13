@@ -93,11 +93,11 @@ public class Hall : MonoBehaviour
 
     public void ClickFeed()
     {
-        if (Global.pets.Count < 1)
+        if (Global.feedingPets.Count < 1)
         {
             return;
         }
-        var pet = Global.pets[0];
+        var pet = Global.feedingPets[0];
         helper.Feed(pet.id);
     }
 
@@ -123,31 +123,41 @@ public class Hall : MonoBehaviour
 
     public void ClickStorePet()
     {
-        if (Global.pets.Count < 1)
+        if (Global.feedingPets.Count < 1)
         {
             return;
         }
-        var pet = Global.pets[0];
+        var pet = Global.feedingPets[0];
         helper.Store(pet.id);
     }
 
-    public void ClickSell()
+    public void ClickSellFeedingPet()
     {
-        if (Global.pets.Count < 1)
+        if (Global.feedingPets.Count < 1)
         {
             return;
         }
-        var pet = Global.pets[0];
+        var pet = Global.feedingPets[0];
+        helper.Sell(pet.id);
+    }
+
+    public void ClickSellPetsForSale()
+    {
+        if (Global.petsForSale.Count < 1)
+        {
+            return;
+        }
+        var pet = Global.petsForSale[0];
         helper.Sell(pet.id);
     }
 
     public void ClickGetFreeFeedTimeLeft()
     {
-        if (Global.pets.Count < 1)
+        if (Global.feedingPets.Count < 1)
         {
             return;
         }
-        var pet = Global.pets[0];
+        var pet = Global.feedingPets[0];
         helper.GetFreeFeedTimeLeft(pet.id);
     }
 

@@ -189,8 +189,18 @@ public class LoginHelper
 
     public void OnUpdatePets(JsonData jd)
     {
-        Global.pets = Pet.ParsePets(jd["Pets"]);
-        foreach (Pet pet in Global.pets)
+        int state = int.Parse(jd["State"].ToJson());
+        var pets = Pet.ParsePets(jd["Pets"]);
+        if (state == 0) // 喂养状态
+        {
+            Global.feedingPets = pets;
+        }
+        else if (state == 1) // 待售状态
+        {
+            Global.petsForSale = pets;
+        }
+
+        foreach (Pet pet in pets)
         {
             Debug.Log(pet.ToString());
         }
