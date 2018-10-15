@@ -165,4 +165,9 @@ public class Hall : MonoBehaviour
     {
         StartCoroutine(Utils.HttpGet(Config.GetConsumptionSmsCodeUrl(Global.account, "86"), helper.GetConsumptionSmsCodeCallback));
     }
+
+    public void OnApplicationQuit()
+    {
+        Global.gsws.Disconnect();
+    }
 }
