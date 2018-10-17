@@ -93,6 +93,11 @@ public class LoginHelper
         Global.gsws.SendMsg(new C2S_Register().CreateRegisterMsg(mobileCode.text.Substring(2), account.text, password.text, smsCode.text, invitationCode.text, "zh"));
     }
 
+    public string GetRegisterUrl()
+    {
+        return Config.GetRegisterUrl(mobileCode.text.Substring(2), account.text, password.text, password.text, smsCode.text, invitationCode.text, "zh");
+    }
+
     public void OnRegister(JsonData jd)
     {
         Debug.Log("OnRegister: " + jd.ToJson());
@@ -233,6 +238,17 @@ public class LoginHelper
         for (int i = 0; i < jd.Count; i++)
         {
             Debug.Log(jd[i].ToJson());
+        }
+    }
+
+    public void RegisterCallback(JsonData jd)
+    {
+        Debug.Log(jd.ToJson());
+        var errCode = int.Parse(jd["ErrCode"].ToString());
+        var errMsg = jd["ErrMsg"].ToString();
+        if (errMsg.Length > 0)
+        {
+            tips.Show(errMsg);
         }
     }
 }

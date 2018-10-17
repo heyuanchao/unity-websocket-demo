@@ -50,6 +50,8 @@ public class Login : MonoBehaviour
 
     public void ClickRegister()
     {
+        StartCoroutine(Utils.HttpGet(helper.GetRegisterUrl(), helper.RegisterCallback));
+        /*
         Messenger.AddListener("OnServerConnect", helper.Register);
 
         if (Global.gsws.IsConnected())
@@ -60,6 +62,7 @@ public class Login : MonoBehaviour
         {
             Global.gsws.Connect();
         }
+        */
     }
 
     public void ClickPasswordLogin()
