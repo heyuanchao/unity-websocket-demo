@@ -7,10 +7,10 @@
     private const string gameServHost = localServHost;
     // private const string gameServHost = remoteServHost;
 
-    public const string gameServWSAddr = "ws://" + gameServHost + ":8000";
-    public const string gameServHTTPAddr = "http://" + gameServHost + ":8001";
+    public const string gameServWSAddr = "ws://" + gameServHost + ":8010";
+    public const string gameServHTTPAddr = "http://" + gameServHost + ":8011";
 
-    public const string registerUrl = gameServHTTPAddr + "/register";
+    public const string registerUrl = "http://" + gameServHost + ":8001" + "/register";
 
     public const string checkAccountUrl = gameServHTTPAddr + "/check";
     public const string resetPasswordUrl = gameServHTTPAddr + "/reset";
