@@ -44,20 +44,20 @@ public class Utils
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
 
+        JsonData jd = null;
         if (request.isNetworkError)
         {
             Debug.Log("request url: " + url + " error: " + request.error);
-            yield return null;
         }
-        if (request.responseCode == 200)
+        else if (request.responseCode == 200)
         {
             string text = request.downloadHandler.text;
             // Debug.Log(text);
-            JsonData jd = JsonMapper.ToObject(text);
-            if (callback != null)
-            {
-                callback.Invoke(jd);
-            }
+            jd = JsonMapper.ToObject(text);
+        }
+        if (callback != null)
+        {
+            callback.Invoke(jd);
         }
     }
 

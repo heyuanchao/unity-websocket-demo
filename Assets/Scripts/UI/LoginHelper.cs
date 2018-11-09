@@ -163,6 +163,11 @@ public class LoginHelper
 
     public void CheckAccountCallback(JsonData jd)
     {
+        if (jd == null)
+        {
+            Debug.Log("请求失败，请稍后重试");
+            return;
+        }
         // Debug.Log(jd.ToJson());
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
@@ -174,6 +179,11 @@ public class LoginHelper
 
     public void GetRegistrationSmsCodeCallback(JsonData jd)
     {
+        if (jd == null)
+        {
+            Debug.Log("请求失败，请稍后重试");
+            return;
+        }
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
@@ -184,6 +194,11 @@ public class LoginHelper
 
     public void ResetPasswordCallback(JsonData jd)
     {
+        if (jd == null)
+        {
+            Debug.Log("请求失败，请稍后重试");
+            return;
+        }
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
@@ -230,11 +245,16 @@ public class LoginHelper
 
     public void GetServerListCallback(JsonData jd)
     {
-        if (!jd.IsArray)
+        if (jd == null)
         {
+            Debug.Log("请求失败，请稍后重试");
             return;
         }
-
+        if (!jd.IsArray)
+        {
+            Debug.Log("服务端返回数据异常");
+            return;
+        }
         for (int i = 0; i < jd.Count; i++)
         {
             Debug.Log(jd[i].ToJson());
@@ -243,6 +263,11 @@ public class LoginHelper
 
     public void RegisterCallback(JsonData jd)
     {
+        if (jd == null)
+        {
+            Debug.Log("请求失败，请稍后重试");
+            return;
+        }
         Debug.Log(jd.ToJson());
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
