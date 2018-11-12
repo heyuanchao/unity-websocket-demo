@@ -261,6 +261,16 @@ public class LoginHelper
         }
     }
 
+    public void GetVersionCallback(JsonData jd)
+    {
+        if (jd == null)
+        {
+            tips.Show("检测新版本失败，请检查网络后重试");
+            return;
+        }
+        Debug.Log(jd.ToJson());
+    }
+
     public void RegisterCallback(JsonData jd)
     {
         if (jd == null)

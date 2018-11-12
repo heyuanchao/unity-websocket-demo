@@ -147,4 +147,9 @@ public class Login : MonoBehaviour
     {
         StartCoroutine(Utils.HttpGet(Config.serverListUrl, helper.GetServerListCallback));
     }
+
+    public void ClickGetVersion()
+    {
+        StartCoroutine(Utils.HttpGet(Config.versionUrl, helper.GetVersionCallback));
+    }
 }

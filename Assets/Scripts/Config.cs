@@ -1,14 +1,14 @@
 ﻿public class Config
 {
-    private const string localServHost = "192.168.8.188";
+    private const string localServHost = "192.168.8.61";
     // private const string localServHost = "192.168.11.24";
     private const string remoteServHost = "game.hedr.top";
 
     private const string gameServHost = localServHost;
     // private const string gameServHost = remoteServHost;
 
-    public const string gameServWSAddr = "ws://" + gameServHost + ":8010";
-    public const string gameServHTTPAddr = "http://" + gameServHost + ":8011";
+    public const string gameServWSAddr = "ws://" + gameServHost + ":8000";
+    public const string gameServHTTPAddr = "http://" + gameServHost + ":8001";
 
     public const string registerUrl = "http://" + gameServHost + ":8001" + "/register";
 
@@ -19,6 +19,8 @@
     public const string consumptionSmsCodeUrl = gameServHTTPAddr + "/consumptionSmsCode";
 
     public const string serverListUrl = gameServHTTPAddr + "/serverList";
+
+    public const string versionUrl = gameServHTTPAddr + "/version";
 
     public static string GetRegisterUrl(string mobileCode, string account, string password, string password2, string smsCode, string invitationCode, string lang)
     {

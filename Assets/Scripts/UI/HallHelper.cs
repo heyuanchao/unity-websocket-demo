@@ -258,6 +258,11 @@ public class HallHelper
 
     public void GetConsumptionSmsCodeCallback(JsonData jd)
     {
+        if (jd == null)
+        {
+            Debug.Log("请求失败，请稍后重试");
+            return;
+        }
         var errCode = int.Parse(jd["ErrCode"].ToString());
         var errMsg = jd["ErrMsg"].ToString();
         if (errMsg.Length > 0)
