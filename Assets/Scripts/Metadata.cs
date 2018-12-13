@@ -137,3 +137,35 @@ public class Goods
             + ", Hot: " + hot;
     }
 }
+
+public class Home
+{
+    public int petType;
+    public int state;
+    public int comeBackAt;
+
+    public static List<Home> ParseHomes(JsonData jd)
+    {
+        List<Home> l = new List<Home>();
+        foreach (JsonData item in jd)
+        {
+            // Debug.Log(item.ToJson());
+            Home home = new Home
+            {
+                petType = int.Parse(item["PetType"].ToString()),
+                state = int.Parse(item["State"].ToString()),
+                comeBackAt = int.Parse(item["ComeBackAt"].ToString()),
+            };
+
+            l.Add(home);
+        }
+        return l;
+    }
+
+    public override string ToString()
+    {
+        return "PetType: " + petType
+            + ", State: " + state
+            + ", ComeBackAt: " + comeBackAt;
+    }
+}

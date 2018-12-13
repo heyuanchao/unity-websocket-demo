@@ -134,6 +134,11 @@ public class HallHelper
         Global.gsws.SendMsg(new C2S_GetGoods().CreateGetGoodsMsg());
     }
 
+    public void GetHomes()
+    {
+        Global.gsws.SendMsg(new C2S_GetHomes().CreateGetHomesMsg());
+    }
+
     public void OnUpdateEggs(JsonData jd)
     {
         Global.eggs = Egg.ParseEggs(jd["Eggs"]);
@@ -168,6 +173,15 @@ public class HallHelper
         foreach (Goods g in Global.goods)
         {
             Debug.Log(g.ToString());
+        }
+    }
+
+    public void OnUpdateHomes(JsonData jd)
+    {
+        Global.homes = Home.ParseHomes(jd["Homes"]);
+        foreach (Home h in Global.homes)
+        {
+            Debug.Log(h.ToString());
         }
     }
 

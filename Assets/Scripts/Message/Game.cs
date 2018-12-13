@@ -65,6 +65,23 @@ public class S2C_UpdateGoods
     public static readonly string msgName = "S2C_UpdateGoods";
 }
 
+public class C2S_GetHomes
+{
+    public static readonly string msgName = "C2S_GetHomes";
+    private readonly JsonData jsonData = new JsonData();
+
+    public JsonData CreateGetHomesMsg()
+    {
+        jsonData[msgName] = JsonMapper.ToObject("{}");
+        return jsonData;
+    }
+}
+
+public class S2C_UpdateHomes
+{
+    public static readonly string msgName = "S2C_UpdateHomes";
+}
+
 public class C2S_Feed
 {
     public static readonly string msgName = "C2S_Feed";

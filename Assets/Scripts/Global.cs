@@ -17,5 +17,7 @@ public static class Global
 
     public static List<Goods> goods = new List<Goods>();
 
+    public static List<Home> homes = new List<Home>();
+
     public static List<string> marquees = new List<string>();
 }
